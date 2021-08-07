@@ -19,10 +19,7 @@ const valoresIniciales = {
   cp:"",
 }
 
-const valoresInicialeslogin = {
-  username:"",
-  password:"", 
-}
+
 
 export default function Home() {
   
@@ -33,7 +30,6 @@ export default function Home() {
       onClose: onCloseLoginModal 
   } = useDisclosure() // Manejador del modal del formulario de login
   const [formValues, setFormValues] = useState(valoresIniciales);
-  const [formloginValues, setFormloginValues] = useState(valoresInicialeslogin);
   const [usuarioParaEditar, setUsuarioParaEditar] = useState(null); // Se llena cuando hay una tarea para editar
   
   const {usuarioLogueado} = useLoginContext()
@@ -44,7 +40,7 @@ export default function Home() {
   };
 
   const abrirModalLogin = () => {
-    setFormloginValues(valoresInicialeslogin);
+    /* setFormloginValues(valoresInicialeslogin); */
     onOpenLoginModal();
   }
 
@@ -114,9 +110,7 @@ export default function Home() {
           isOpen={isOpenLoginModal}
           onClose={onCloseLoginModal}
           onOpen = {onOpenLoginModal}
-          formValues = {formloginValues}
-          setFormValues = {setFormloginValues}
-          valoresIniciales = {valoresInicialeslogin}
+          
          
       />
     </>    

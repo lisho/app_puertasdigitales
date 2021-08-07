@@ -5,7 +5,7 @@ import { LoginProvider } from "../contextos/LoginProvider";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Provider session={pageProps.session}>
+   /*  <Provider session={pageProps.session}> */
       <ChakraProvider /* theme={theme} */>
         <DefaultLayout>
           <LoginProvider>
@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }) {
           </LoginProvider>
         </DefaultLayout>
       </ChakraProvider>
-    </Provider>
+    /* </Provider> */
   );
 }
 

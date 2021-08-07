@@ -11,6 +11,7 @@ const useLoginContext = () => {
     return useContext(LoginContext)
 }
 
+
 /* Creamos el provider incluyendo ya el context.provider */
 const LoginProvider = ({children}) => {
     
@@ -19,6 +20,12 @@ const LoginProvider = ({children}) => {
     const [usuarioLogueado, setUsuarioLogueado] = useState({});
     const [msgError, setMsgError] = useState("");
     const router = useRouter()
+
+    useEffect(() => {
+      !usuarioLogueado.token && router.push('/')
+      console.log("revisando usuario logueado")
+      
+    }, [usuarioLogueado]);
 
     useEffect(() => {
       
@@ -34,22 +41,24 @@ const LoginProvider = ({children}) => {
         window.sessionStorage.setItem("login puertas digitales", JSON.stringify(login));
         router.push('/puertas');
         setMsgError("");
+        setCredenciales(null)
       }
     })
 
     }, [credenciales]);
 
-    useEffect(() => {
+   /*  useEffect(() => {
       !usuarioLogueado.token && router.push('/')
       console.log("revisando usuario logueado")
       
-    }, []);
+    }, [usuarioLogueado]); */
     
     return (
 
         <LoginContext.Provider value={{usuarioLogueado ,setUsuarioLogueado, setCredenciales, msgError, setMsgError}}>
           {console.log(msgError)}
           {console.log(usuarioLogueado)}
+
             {children}
         </LoginContext.Provider>
     )

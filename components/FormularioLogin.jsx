@@ -16,51 +16,56 @@ import {
   Text,
 } from "@chakra-ui/react";
 
+
+const valoresInicialesFormularioLogin = {
+  username:"",
+  password:"", 
+}
+
 const FormularioLogin = ({
   isOpen,
   onOpen,
   onClose,
-  formValues,
-  setFormValues,
-  valoresIniciales,
+  
 }) => {
   const initialRef = useRef();
 
+  const [formLoginValues, setFormLoginValues] = useState(valoresInicialesFormularioLogin);
+  const {setUsuarioLogueado, usuarioLogueado, setCredenciales, msgError,setMsgError} = useLoginContext()
+  console.log("formLoginValues", formLoginValues)
   const {
     username,
     password,
-  } = formValues;
+  } = formLoginValues;
 
-  const {setUsuarioLogueado, usuarioLogueado, setCredenciales, msgError,setMsgError} = useLoginContext()
-  
   useEffect(() => {
     if (usuarioLogueado.id) { 
       onClose();
-      setFormValues(valoresIniciales)
+      setFormLoginValues(valoresIniciales)
     
     }
   
   }, [usuarioLogueado]);
   
   const handleInputChange = (e) => {
-    const changedFormValues = {
-      ...formValues,
+    const changedformLoginValues = {
+      ...formLoginValues,
       [e.target.name]: e.target.value,
     };
-    setFormValues(changedFormValues);
+    setFormLoginValues(changedformLoginValues);
   };
 
 
   const handleSubmit = () => {
      setUsuarioLogueado({})
-     setCredenciales (formValues)
+     setCredenciales (formLoginValues)
 
     console.log("Nueva login enviado...");
     
   };
 
   const handleCancelar = () => {
-    setFormValues(valoresIniciales);
+    setFormLoginValues(valoresInicialesFormularioLogin);
     setMsgError("")
     onClose();
   };
