@@ -1,16 +1,9 @@
-import { signIn, signOut, useSession } from 'next-auth/client'
 
-export default function Page() {
-  const [ session, loading ] = useSession()
+export default function Puertas() {
 
-  return <>
-    {!session && <>
-      Not signed in <br/>
-      <button onClick={() => signIn()}>Sign in</button>
-    </>}
-    {session && <>
-      Signed in as {session.user.email} <br/>
-      <button onClick={() => signOut()}>Sign out</button>
-    </>}
-  </>
+  return (
+    
+    <div>
+      Estas en puertas....
+    </div>)
 }
