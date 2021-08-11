@@ -1,7 +1,7 @@
 import { Button } from "@chakra-ui/react";
 import { useLoginContext } from "../contextos/LoginProvider";
 
-const logOutButton = () => {
+const LogOutButton = () => {
 
     const {setUsuarioLogueado} = useLoginContext();
     const handleLogOut = () => {
@@ -15,4 +15,4 @@ const logOutButton = () => {
     );
 }
 
-export default logOutButton;
+export default LogOutButton;

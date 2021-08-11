@@ -41,7 +41,7 @@ const FormularioLogin = ({
   useEffect(() => {
     if (usuarioLogueado.id) { 
       onClose();
-      setFormLoginValues(valoresIniciales)
+      setFormLoginValues(valoresInicialesFormularioLogin)
     
     }
   
@@ -85,6 +85,7 @@ const FormularioLogin = ({
               <FormLabel>Usuario</FormLabel>
               <Input
                 ref={initialRef}
+                type="text"
                 placeholder="Nombre de ususario"
                 value={username}
                 name="username"
@@ -96,6 +97,7 @@ const FormularioLogin = ({
               <FormLabel>Contraseña</FormLabel>
               <Input
                 /* ref={initialRef} */
+                type="password"
                 placeholder="Contraseña"
                 value={password}
                 name="password"

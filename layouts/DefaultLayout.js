@@ -1,7 +1,8 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-
-import FooterPrincipal from "../components/FooterPrincipal"; 
+import FooterPrincipal from "../components/FooterPrincipal";
+import Navbar from "../components/Navbar";
+import { LoginProvider } from "../contextos/LoginProvider";
 
 function DefaultLayout({ children }) {
   return (
@@ -14,15 +15,14 @@ function DefaultLayout({ children }) {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <LoginProvider>
+        <Navbar />
+        <div className={styles.main}>{children}</div>
 
-          <main id="main" className={styles.main}>
-            {children}
-          </main>
-
-          <footer className={styles.footer}>
-            <FooterPrincipal />
-          </footer>
-
+        <footer className={styles.footer}>
+          <FooterPrincipal />
+        </footer>
+      </LoginProvider>
     </div>
   );
 }
