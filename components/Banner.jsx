@@ -6,7 +6,7 @@ const Banner = () => {
           
           /* background-repeat: no-repeat; */
           background-size: cover;
-          /* background-position: "center"; */
+          background-position: center;
           background-image: linear-gradient(
             180deg,
             rgba(255, 255, 255, 0) 76%,

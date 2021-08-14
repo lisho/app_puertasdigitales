@@ -13,6 +13,9 @@ function DefaultLayout({ children }) {
           name="description"
           content="Aplicacion para facilitar el acceso a la administración electrónica y a otros recursos de internet a todas las personas"
         />
+        <meta name="viewport" content="width=device-width " />
+        <meta name="charset" content="utf-8 " />
+       
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <LoginProvider>

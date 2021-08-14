@@ -9,6 +9,7 @@
   align-items: center;
   /* height: 100vh; */
   background-color:rgb(28, 44, 44);
+ 
 }
 
 .main {
@@ -20,6 +21,7 @@
   align-items: center;
   width: 100%;
   background-color: #fff;
+
 }
 
 .footer {
@@ -31,6 +33,7 @@
   justify-content: center;
   align-items: center;
   background-color: #fafafa;
+ 
 }
 
 .footer a {

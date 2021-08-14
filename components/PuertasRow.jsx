@@ -1,6 +1,7 @@
 import { Text, Box, Heading } from "@chakra-ui/react";
 import { useEffect, useRef } from "react";
 import useDragScroll from "use-drag-scroll";
+
 const PuertasRow = ({ children, titulo }) => {
   const rowRef = useRef(null);
 
@@ -17,11 +18,13 @@ const PuertasRow = ({ children, titulo }) => {
           /* adding: 0 10px; */
           overflow-y: hidden;
           overflow-x: scroll;
-          padding: 20px;
+          padding: 30px;
           -ms-overflow-style: none; /* IE and Edge */
           scrollbar-width: none; /* Firefox */
           scroll-snap-type: x proximity;
-          margin: 10px;
+          /* margin: 10px; */
+          margin-bottom:30px;
+          height: 100%;
         }
 
         .puertas-row::-webkit-scrollbar {

@@ -2,7 +2,6 @@ import { Text } from "@chakra-ui/react";
 import Banner from "../components/Banner";
 import PuertaCard from "../components/PuertaCard";
 import PuertasRow from "../components/PuertasRow";
-import { AnimateSharedLayout } from "framer-motion"
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -10,7 +9,7 @@ const randomNumPuerta = ()=> {
 
   const array = [];
 
-  for (let i=0; i< 50; i++){
+  for (let i=0; i< 25; i++){
     let num = Math.floor((Math.random() * (24 - 1 + 1)) + 1);
     
     array.push(`./imagenes/g${num}.png`)
