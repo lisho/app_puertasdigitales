@@ -1,4 +1,4 @@
-import { Box, Collapse, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Collapse, Fade, Flex, Heading, Text } from "@chakra-ui/react";
 
 const TarjetaInfoPuerta = ({
   height,
@@ -8,8 +8,8 @@ const TarjetaInfoPuerta = ({
 }) => {
   return (
     <>
-      <Collapse in={isOpenTarjeta} animateOpacity>
-        <Box
+      <Fade in={isOpenTarjeta} animateOpacity >
+        {isOpenTarjeta && <Box
           w={width * 2 + "px"}
           height={height + "px"}
           display="flex"
@@ -30,8 +30,8 @@ const TarjetaInfoPuerta = ({
             </Text>
           </Flex>
           {children}
-        </Box>
-      </Collapse>
+        </Box>}
+      </Fade>
     </>
   );
 };
