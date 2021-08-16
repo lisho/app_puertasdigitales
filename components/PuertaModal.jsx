@@ -1,4 +1,3 @@
-import { ChevronRightIcon } from "@chakra-ui/icons";
 import { v4 as uuidv4 } from "uuid";
 import {
   Modal,
@@ -8,9 +7,6 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Lorem,
-  Button,
-  useDisclosure,
   Flex,
   Heading,
   Container,
@@ -19,80 +15,65 @@ import {
   Wrap,
   WrapItem,
   Link,
-  Box,
   Divider,
+  Button,
 } from "@chakra-ui/react";
 
-const PuertaModal = ({ setDesapareceCuadroInfo, img, desapareceCuadroInfo }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
+const PuertaModal = ({ img, isOpen, onClose, onToggleTarjetaFijada, onToggleTarjeta }) => {
   const handleCloseModal = async () => {
+    onToggleTarjetaFijada();
+    onToggleTarjeta();
     onClose();
-    await setDesapareceCuadroInfo(true);
+    
   };
 
   console.log(img);
   return (
     <>
-      { !desapareceCuadroInfo &&<Flex
-        w="25px"
-        h="25px"
-        border="solid 1px rgba(0, 0, 0, 0.8)"
-        borderRadius="50"
-        alignContent="center"
-        justifyContent="center"
-        alignItems="center"
-        position="absolute"
-        right="15px"
-        bottom="15px"
-        boxShadow="2px 2px 3px rgba(0, 0, 0, .6)"
-        onClick={() => onOpen()}
-      >
-        <ChevronRightIcon />
-      </Flex>}
-
       <Modal isOpen={isOpen} size="full" onClose={() => handleCloseModal()}>
         <ModalOverlay />
         <ModalContent mb="0" mt="0">
           <ModalHeader></ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Container display="flex" flexDirection="column" maxW="container.xl" alignItems="center">
-              <Flex id="cabecera"
+            <Container
+              display="flex"
+              flexDirection="column"
+              maxW="container.xl"
+              alignItems="center"
+            >
+              <Flex
+                id="cabecera"
                 maxW="500px"
                 justifyContent="center"
                 alignItems="center"
                 m="5"
                 flexDirection="column"
               >
-              <Flex>
-                <Link
-                  href="https://solicitarinformevidalaboral.com/?gclid=CjwKCAjw092IBhAwEiwAxR1lRkIaneiSsntKUDvovK4bzSPBECbvLOBTfESEfLlZCPw2ZE9ZHBGrcRoCR-0QAvD_BwE"
-                  isExternal
-                >
-                  <Image
-                    src={img}
-                    height="auto"
-                    width="auto"
-                    display="flex"
-                    boxShadow="2px 2px 5px rgba(0,0,0,.5)"
-                  />
-                  
-                </Link>
-                <Flex ml="3" alignItems="center">
-                <Heading as="h2" fontSize="2xl" color="teal"  align="center" >
-                  Obtener certificado de vida lavoral
-                </Heading>
-         
-                </Flex>
-                
-             
+                <Flex>
+                  <Link
+                    href="https://solicitarinformevidalaboral.com/?gclid=CjwKCAjw092IBhAwEiwAxR1lRkIaneiSsntKUDvovK4bzSPBECbvLOBTfESEfLlZCPw2ZE9ZHBGrcRoCR-0QAvD_BwE"
+                    isExternal
+                  >
+                    <Image
+                      src={img}
+                      height="auto"
+                      width="auto"
+                      display="flex"
+                      boxShadow="2px 2px 5px rgba(0,0,0,.5)"
+                    />
+                  </Link>
+                  <Flex ml="3" alignItems="center">
+                    <Heading as="h2" fontSize="2xl" color="teal" align="center">
+                      Obtener certificado de vida lavoral
+                    </Heading>
+                  </Flex>
                 </Flex>
                 <Divider />
                 <Flex mt="3">
-                  <Flex >
+                  <Flex>
                     <Wrap spacing="0" justify="center">
-                      <WrapItem  >
+                      <WrapItem>
                         <Tag
                           size="sm"
                           key={uuidv4()}
@@ -159,7 +140,6 @@ const PuertaModal = ({ setDesapareceCuadroInfo, img, desapareceCuadroInfo }) => 
                   </Flex>{" "}
                 </Flex>
               </Flex>
-             
               Lorem ipsum dolor sit amet, consectet
             </Container>
           </ModalBody>
@@ -172,7 +152,6 @@ const PuertaModal = ({ setDesapareceCuadroInfo, img, desapareceCuadroInfo }) => 
             >
               Close
             </Button>
-            
           </ModalFooter>
         </ModalContent>
       </Modal>

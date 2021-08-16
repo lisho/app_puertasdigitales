@@ -34,7 +34,7 @@ export default function Puertas() {
     <>
       <style jsx>{`
         .container {
-         /*  width: 100vw; */
+          width: 100vw;
           flex-direction: column;
           min-height: 100%;
           display: grid;

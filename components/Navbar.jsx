@@ -16,9 +16,9 @@ import { useEffect, useState } from "react";
 import { useLoginContext } from "../contextos/LoginProvider";
 
 const Navbar = () => {
-  const { usuarioLogueado } = useLoginContext();
+  const { usuarioLogueado, logOut } = useLoginContext();
   const router = useRouter();
-
+  console.log(router)
   return router.route !== "/" ? 
     <Box
       w="100%"
@@ -58,15 +58,28 @@ const Navbar = () => {
               alt="Fluffybuns the destroyer"
               mr="12px"
             />
-            <Text>antonio</Text><ChevronDownIcon />
+            <Text>
+              {usuarioLogueado.username}
+              {usuarioLogueado.rol==="admin" && " (Admin)"}
+            </Text>
+            <ChevronDownIcon />
           </Box>
         </MenuButton>
         <MenuList id="btn-perfil-menulist">
           <MenuItem keyid="menuItem1">Download</MenuItem>
           <MenuItem keyid="menuItem2">Create a Copy</MenuItem>
           <MenuItem keyid="menuItem3">Mark as Draft</MenuItem>
-          <MenuItem keyid="menuItem4">Delete</MenuItem>
-          <MenuItem keyid="menuItem5">Attend a Workshop</MenuItem>
+
+          {usuarioLogueado.rol == "admin" 
+            &&  <MenuItem 
+                  keyid="menuItem4"
+                  onClick={()=> router.route ==="/fabrica" ? router.push('/puertas') : router.push('/fabrica')}
+                  >
+                    {router.route ==="/fabrica" ? "Almacén de puertas" : "Fábrica de puertas"}
+                </MenuItem>
+          }
+
+          <MenuItem keyid="menuItem5" onClick={() =>logOut()}>Cerrar Sesion </MenuItem>
         </MenuList>
       </Menu> 
     </Box>

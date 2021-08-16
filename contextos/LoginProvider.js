@@ -58,9 +58,15 @@ const LoginProvider = ({children}) => {
      
     }, []);
 
+    const logOut = () => {
+      setIsLoged(false);
+      setUsuarioLogueado({});
+     router.push('/')
+    }
+
     return (
 
-        <LoginContext.Provider value={{usuarioLogueado , isLoged, setUsuarioLogueado, setCredenciales, msgError, setMsgError}}>
+        <LoginContext.Provider value={{usuarioLogueado , isLoged, setUsuarioLogueado, setCredenciales, msgError, setMsgError, logOut}}>
             {children}
         </LoginContext.Provider>
     )
