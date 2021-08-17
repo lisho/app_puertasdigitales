@@ -1,6 +1,7 @@
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import { Box, useDisclosure, Flex } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import useSoloUnaTarjetaGrande from "../customHooks/useSoloUnaTarjetaGrande";
 import FondoPuerta from "./FondoPuerta";
 import PuertaModal from "./PuertaModal";
 import TarjetaInfoPuerta from "./TarjetaInfoPuerta";
@@ -8,11 +9,14 @@ import TarjetaInfoPuerta from "./TarjetaInfoPuerta";
 const PuertaCard = ({ ratioH = 1, ratioW = 1, url, img }) => {
   const [height, setHeight] = useState(null);
   const [width, setWidth] = useState(null);
-  const { isOpen: tarjetaFijada, onToggle: onToggleTarjetaFijada } = useDisclosure(false);
-  const { isOpen: isOpenTarjeta, onToggle: onToggleTarjeta } = useDisclosure(false);
+  const { isOpen: tarjetaFijada, onToggle: onToggleTarjetaFijada } = useDisclosure({defaultIsOpen:true});
+  const { isOpen: isOpenTarjeta, onToggle: onToggleTarjeta } = useDisclosure({defaultIsOpen:true});
+  const { isOpen: isTarjetaGrande, onToggle: onToggleTarjetaGrande } = useDisclosure();
   const [mensajeBoton, setMensajeBoton] = useState("");
   //Toggle de la puerta modal
   const { isOpen, onOpen, onClose } = useDisclosure();
+  //CustomHook para hacer que sólo haya una tarjeta resaltada
+  const { ref, isSoloUnaTarjetaGrande, setIsSoloUnaTarjetaGrande } = useSoloUnaTarjetaGrande(false, isTarjetaGrande);
 
   useEffect(() => {
     const initialHeight = 315 * ratioH;
@@ -30,12 +34,19 @@ const PuertaCard = ({ ratioH = 1, ratioW = 1, url, img }) => {
    /*  !tarjetaFijada && onToggleTarjeta(); */
   };
 
-  const handleClick = async () => {
-    onToggleTarjetaFijada();
-    onToggleTarjeta();
+  const handleClick = () => {
+    /* onToggleTarjetaFijada(); */
+    /* onToggleTarjeta(); */
+    onToggleTarjetaGrande();
+    setIsSoloUnaTarjetaGrande();
    
-    await console.log(tarjetaFijada)
   }
+
+  useEffect(() => {
+    isSoloUnaTarjetaGrande && onToggleTarjetaGrande();
+  
+  }, [isSoloUnaTarjetaGrande])
+  
 
   return (
     <>
@@ -48,15 +59,17 @@ const PuertaCard = ({ ratioH = 1, ratioW = 1, url, img }) => {
           box-shadow: 4px 4px 3px rgba(0, 0, 0, 0.5);
           align-items: center;
           display: flex;
-          border-radius: ${isOpenTarjeta ? "10px" : "5px"};
+          border-radius: 10px /* ${isTarjetaGrande ? "10px" : "5px"} */;
+          
         }
 
         .card:hover {
-          transform: scale(1.3);
-        }
+          
+        } 
       `}</style>
 
       <Box
+        ref={ref}
         h={height}
         w="100%"
         display="flex"
@@ -66,17 +79,23 @@ const PuertaCard = ({ ratioH = 1, ratioW = 1, url, img }) => {
         flexDirection="column"
         justifyContent="center"
         transition="all 450ms ease"
-        zIndex="100"
+        zIndex={isTarjetaGrande ? "1000" : "100"}
         opacity=".8"
-        _hover={{
+        /* transform = {isTarjetaGrande && "scale(1.3)"} */
+        margin = {isTarjetaGrande && `0 ${height}` }  
+        opacity= {isTarjetaGrande && "1"}
+        transform = {isTarjetaGrande && "scale(1.3)"}
+        cursor= "pointer"
+
+       /*  _hover={{
           margin: `0 ${height}`,
           opacity: "1",
           zIndex: "1000",
           cursor: "pointer",
-        }}
-        onMouseEnter={() => handleMouseEnter()}
-        onMouseLeave={() => handleMouseLeave()}
-        onClick={() => handleClick()}
+        }} */
+        /* onMouseEnter={() => handleMouseEnter()}
+        onMouseLeave={() => handleMouseLeave()}*/
+        onClick={() => handleClick()} 
       >
         <div className=" card">
           <FondoPuerta
@@ -85,6 +104,7 @@ const PuertaCard = ({ ratioH = 1, ratioW = 1, url, img }) => {
             img={img}
             isOpenTarjeta={isOpenTarjeta}
             tarjetaFijada={tarjetaFijada}
+            isTarjetaGrande={isTarjetaGrande}
           />
 
           <TarjetaInfoPuerta
@@ -92,27 +112,30 @@ const PuertaCard = ({ ratioH = 1, ratioW = 1, url, img }) => {
             width={width}
             isOpenTarjeta={isOpenTarjeta}
           >
+         
             <Flex
-              w="auto"
-              minW="25px"
+              /* w="100%"  */
+              w="25px"
               h="25px"
               pl="1"
               border="solid 1px rgba(0, 0, 0, 0.8)"
               borderRadius="50"
               alignContent="center"
+              alignSelf= "flex-end"
               justifyContent="center"
               alignItems="center"
-              position="absolute"
-              right="15px"
-              bottom="15px"
+              /* position="absolute" */
+               right="15px"
+              bottom="15px" 
               boxShadow="2px 2px 3px rgba(0, 0, 0, .6)"
               onClick={() => onOpen()}
-              _hover={{backgroundColor:"grey", color:"white"}}
-              onMouseEnter={() => setMensajeBoton("Entrar")}
-              onMouseLeave={() => setMensajeBoton("")}
+              _hover={{backgroundColor:"grey", color:"white", width:"80px"}}
+             /*  onMouseEnter={() => setMensajeBoton("Entrar")}
+              onMouseLeave={() => setMensajeBoton("")} */
             >
               {mensajeBoton}<ChevronRightIcon />
             </Flex>
+          
           </TarjetaInfoPuerta>
         </div>
       </Box>

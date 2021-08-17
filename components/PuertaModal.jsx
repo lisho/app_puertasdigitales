@@ -21,8 +21,8 @@ import {
 
 const PuertaModal = ({ img, isOpen, onClose, onToggleTarjetaFijada, onToggleTarjeta }) => {
   const handleCloseModal = async () => {
-    onToggleTarjetaFijada();
-    onToggleTarjeta();
+    /* onToggleTarjetaFijada();
+    onToggleTarjeta(); */
     onClose();
     
   };
@@ -65,7 +65,7 @@ const PuertaModal = ({ img, isOpen, onClose, onToggleTarjetaFijada, onToggleTarj
                   </Link>
                   <Flex ml="3" alignItems="center">
                     <Heading as="h2" fontSize="2xl" color="teal" align="center">
-                      Obtener certificado de vida lavoral
+                      Obtener certificado de vida laboral
                     </Heading>
                   </Flex>
                 </Flex>

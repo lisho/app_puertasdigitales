@@ -10,7 +10,7 @@ const Banner = () => {
           background-image: linear-gradient(
             180deg,
             rgba(255, 255, 255, 0) 76%,
-            rgba(28, 44, 44, 1) 98%           
+            ${process.env.NEXT_PUBLIC_COLOR_FONDO_ALMACEN} 98%           
             ), url("./imagenes/almacen.png");
        
           height: 80vh;

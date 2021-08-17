@@ -20,7 +20,7 @@ const TarjetaInfoPuerta = ({
           justifyContent="center"
           alignItems="center"
         >
-          <Flex p="2" direction="column">
+          <Flex p="2" direction="column" height={height + "px"}>
             <Heading as="h2" fontSize="lg">
               Titulo de la Tarjeta
             </Heading>
@@ -28,8 +28,13 @@ const TarjetaInfoPuerta = ({
               lorem ipsum dolor sit am lorem lorem ipsum dolor sit am lorem
               ipsum dolor sit am lorem ipsum dolor sit am
             </Text>
+            <Flex 
+              alignSelf= "flex-end"
+              height= "inherit"
+            >{children}</Flex>
+           
           </Flex>
-          {children}
+          
         </Box>}
       </Fade>
     </>

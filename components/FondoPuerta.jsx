@@ -6,7 +6,8 @@ const FondoPuerta = ({
   width,
   img,
   isOpenTarjeta,
-  tarjetaFijada
+  tarjetaFijada,
+  isTarjetaGrande
 }) => {
   return (
     <>
@@ -14,7 +15,7 @@ const FondoPuerta = ({
         .carddiv {
           height: ${height + "px"};
           width: ${width + "px"};
-          max-width: 80vw;
+          /* max-width: 80vw; */
           background-image: url("${img}");
           background-position: center;
           background-repeat: no-repeat;
@@ -32,8 +33,8 @@ const FondoPuerta = ({
         .carddiv:hover {
         }
       `}</style>
-
-      <div className="carddiv">{children}</div>
+  
+        <div className="carddiv">{children}</div>
 
     </>
   );

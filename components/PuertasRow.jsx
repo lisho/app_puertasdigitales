@@ -20,7 +20,7 @@ const PuertasRow = ({ children, titulo }) => {
           padding: 30px;
           -ms-overflow-style: none; /* IE and Edge */
           scrollbar-width: none; /* Firefox */
-          scroll-snap-type: x proximity;
+          /* scroll-snap-type: x proximity; */
           margin-bottom:30px;
           height: 100%;
         }
