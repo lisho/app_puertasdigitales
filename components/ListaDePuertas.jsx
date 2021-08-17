@@ -2,12 +2,12 @@ import { Flex, Table, TableCaption, Tbody, Th, Thead, Tr } from "@chakra-ui/reac
 import { useEffect, useState } from "react";
 import traerListaCompleta from "../helpers/traerListaCompleta";
 import PuertaListElement from "./PuertaListElement";
+import { v4 as uuidv4 } from 'uuid';
 
 const valoresIniciales = [
   { titulo: "", descripcion: "", proceso: "", foto: "", video: "" },
 ];
-const ListaDePuertas = () => {
-  const [listaPuertas, setListaPuertas] = useState([]);
+const ListaDePuertas = ({listaPuertas, setListaPuertas}) => {
 
   useEffect(() => {
     const lista = traerListaCompleta("http://0.0.0.0:4030/api/puertas");
@@ -34,7 +34,7 @@ const ListaDePuertas = () => {
         <Tbody>
             {listaPuertas.map((puerta) => 
                     
-                    <PuertaListElement puerta={puerta} />
+                    <PuertaListElement puerta={puerta} key={uuidv4()} setListaPuertas={setListaPuertas}/>
                 )
             } 
         </Tbody>

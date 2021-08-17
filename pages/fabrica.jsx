@@ -1,19 +1,63 @@
+import { useEffect, useState } from "react";
 import { AddIcon, SmallAddIcon } from "@chakra-ui/icons";
-import { Box, Button, Flex, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Text, useDisclosure } from "@chakra-ui/react";
 import FabricaBanner from "../components/FabricaBanner";
+import FormularioPuerta from "../components/FormularioPuerta";
 import ListaDePuertas from "../components/ListaDePuertas";
+import crearNuevoElementoEnBd from "../helpers/crearNuevoElementoEnBD";
+
+const valoresIniciales = {
+  titulo: "",
+  descripcion: "",
+  proceso: "",
+  foto: "",
+  video: "",
+};
 
 const fabrica = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure(); // Manejador del modal del formulario de fabrica de puertas
+  const [formValues, setFormValues] = useState(valoresIniciales);
+  const [puertaParaEditar, setPuertaParaEditar] = useState(null); // Se llena cuando hay una tarea para editar
+  const [listaPuertas, setListaPuertas] = useState([]);
+
+  const abrirModalFormularioCrear = () => {
+    setFormValues(valoresIniciales);
+    onOpen();
+  };
+
+  const handleAdd = (puerta) => {
+    const nuevaPuerta = {
+      ...puerta,
+      
+    };
+
+    console.log(nuevaPuerta);
+    console.log(puerta)
+    
+    crearNuevoElementoEnBd(
+      "http://0.0.0.0:4030/api/puertas/",
+      nuevaPuerta,
+      setListaPuertas,
+      listaPuertas
+    );
+    
+   /*  setListaPuertas([
+      ...listaPuertas,
+      puerta]
+    ) */
+    onClose();
+  };
+
   return (
     <>
       <style jsx>{`
         .container {
           width: 100%;
           flex-direction: column;
-          min-height: 90%;
-          display: flex;
+          min-height: 100%;
+          display: grid;
           background-color: rgb(255, 255, 255);
-          height: 90vh;
+   
         }
       `}</style>
 
@@ -27,14 +71,36 @@ const fabrica = () => {
               Lista de puertas digitales creadas
             </Text>
             <Box align="center">
-              <Button leftIcon={<AddIcon />} colorScheme="teal" variant="solid">
+              <Button 
+                  leftIcon={<AddIcon />} 
+                  colorScheme="teal" 
+                  variant="solid"
+                  onClick={() => abrirModalFormularioCrear()}
+              >
                 Nueva Puerta
               </Button>
             </Box>
-            <ListaDePuertas/>
+            <ListaDePuertas 
+              listaPuertas ={listaPuertas}
+              setListaPuertas ={setListaPuertas}
+            />
           </Flex>
         </Box>
       </div>
+
+      <FormularioPuerta
+        isOpen={isOpen}
+        onClose={onClose}
+        onOpen={onOpen}
+        formValues={formValues}
+        setFormValues={setFormValues}
+        handleAdd={handleAdd}
+        valoresIniciales={valoresIniciales}
+        puertaParaEditar={puertaParaEditar}
+        setPuertaParaEditar={setPuertaParaEditar}
+        listaPuertas ={listaPuertas}
+        setListaPuertas ={setListaPuertas}
+      />
     </>
   );
 };

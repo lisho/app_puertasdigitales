@@ -59,58 +59,52 @@ export default function Home() {
 
   return (
     <>
-      <style jsx>{`
- 
+      <style jsx>{``}</style>
 
-      `}</style>
+      <Box m="15px">
+        <Heading as="h3" size="sm">
+          Bienvenid@ al
+        </Heading>
+        <Heading as="h1" color="darkslategray">
+          Almacén de Puertas Digitales
+        </Heading>
+        <Text maxWidth="600" mb="5">
+          Un proyecto diseñado para falicitar el uso de los recursos de internet
+          a todas las personas, pensando especialmente en aquellas que tienen
+          más dificultades.
+        </Text>
+        <BotonAcceso mr="3" page="/puertas" registrado="false">
+          {" "}
+          Accede sin identificarte
+        </BotonAcceso>
 
-     
-          <Box m="15px">
-            <Heading as="h3" size="sm">
-              Bienvenid@ al
-            </Heading>
-            <Heading as="h1" color="darkslategray">
-              Almacén de Puertas Digitales
-            </Heading>
-            <Text maxWidth="600" mb="5">
-              Un proyecto diseñado para falicitar el uso de los recursos de
-              internet a todas las personas, pensando especialmente en aquellas
-              que tienen más dificultades.
-            </Text>
-            <BotonAcceso mr="3" page="/puertas" registrado="false">
-              {" "}
-              Accede sin identificarte
-            </BotonAcceso>
-
-            {/* <BotonAcceso page="/puertas" registrado="true">Identificate</BotonAcceso> */}
-            <Button onClick={() => abrirModalLogin()}>Identifícate</Button>
-            <Box mt="3">
-              o{" "}
-              <Button color="orange.500" onClick={() => abrirModalRegistro()}>
-                {" "}
-                Registrate{" "}
-              </Button>{" "}
-              para poder guardar tus favoritos.
-            </Box>
-          </Box>
-          <FormularioUser
-            isOpen={isOpen}
-            onClose={onClose}
-            onOpen={onOpen}
-            formValues={formValues}
-            setFormValues={setFormValues}
-            handleAdd={handleAdd}
-            valoresIniciales={valoresIniciales}
-            usuarioParaEditar={usuarioParaEditar}
-            setUsuarioParaEditar={setUsuarioParaEditar}
-          />
-          <FormularioLogin
-            isOpen={isOpenLoginModal}
-            onClose={onCloseLoginModal}
-            onOpen={onOpenLoginModal}
-          />
-      
-     
+        {/* <BotonAcceso page="/puertas" registrado="true">Identificate</BotonAcceso> */}
+        <Button onClick={() => abrirModalLogin()}>Identifícate</Button>
+        <Box mt="3">
+          o{" "}
+          <Button color="orange.500" onClick={() => abrirModalRegistro()}>
+            {" "}
+            Registrate{" "}
+          </Button>{" "}
+          para poder guardar tus favoritos.
+        </Box>
+      </Box>
+      <FormularioUser
+        isOpen={isOpen}
+        onClose={onClose}
+        onOpen={onOpen}
+        formValues={formValues}
+        setFormValues={setFormValues}
+        handleAdd={handleAdd}
+        valoresIniciales={valoresIniciales}
+        usuarioParaEditar={usuarioParaEditar}
+        setUsuarioParaEditar={setUsuarioParaEditar}
+      />
+      <FormularioLogin
+        isOpen={isOpenLoginModal}
+        onClose={onCloseLoginModal}
+        onOpen={onOpenLoginModal}
+      />
     </>
   );
 }
