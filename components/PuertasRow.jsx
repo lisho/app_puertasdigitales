@@ -15,14 +15,14 @@ const PuertasRow = ({ children, titulo }) => {
       <style jsx>{`
         .puertas-row {
           display: flex;
-          overflow-y: hidden;
+          /* overflow-y: hidden; */
           overflow-x: scroll;
           padding: 30px;
           -ms-overflow-style: none; /* IE and Edge */
           scrollbar-width: none; /* Firefox */
           /* scroll-snap-type: x proximity; */
           margin-bottom:30px;
-          height: 100%;
+          height: 110%;
         }
 
         .puertas-row::-webkit-scrollbar {
@@ -31,7 +31,7 @@ const PuertasRow = ({ children, titulo }) => {
       `}</style>
 
       <Box w="100%" pl="50px" color="white">
-        <Heading as="h2" size="xl">
+        <Heading as="h2" size="xl" mt="3">
           {titulo}
         </Heading>
       </Box>

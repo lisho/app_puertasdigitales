@@ -48,7 +48,7 @@ export default function Home() {
     console.log(nuevoUsuario);
 
     crearNuevoElementoEnBd(
-      "http://0.0.0.0:4030/api/usuarios/registro",
+      process.env.NEXT_PUBLIC_URL_API+"usuarios/registro",
       nuevoUsuario,
       null,
       null

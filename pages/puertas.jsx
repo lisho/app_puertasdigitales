@@ -1,6 +1,7 @@
 import { Text } from "@chakra-ui/react";
 import Banner from "../components/Banner";
 import PuertaCard from "../components/PuertaCard";
+import PuertaCardVertical from "../components/PuertaCardVertical";
 import PuertasRow from "../components/PuertasRow";
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
@@ -12,21 +13,28 @@ const randomNumPuerta = ()=> {
   for (let i=0; i< 25; i++){
     let num = Math.floor((Math.random() * (24 - 1 + 1)) + 1);
     
-    array.push(`./imagenes/g${num}.png`)
+/*     array.push(`./imagenes/g${num}.png`)
+ */    array.push(`./imagenes/puerta-abierta_ayto.png`)
   }
-    
+  
   return array
+}
+
+let valores_iniciales =[];
+for (let i = 0; i <4; i++) {
+  valores_iniciales = [...valores_iniciales, randomNumPuerta()]
+
 }
 
 export default function Puertas() {
   
  /*  const [numPuerta, setnumPuerta] = useState(randomNumPuerta()) */
- const [puertas, setPuertas] = useState(null);
+ const [puertas, setPuertas] = useState(valores_iniciales);
 
- useEffect(() => {
-   const puertasArray = randomNumPuerta();
-   setPuertas(puertasArray)
+ useEffect( () => {
+
   
+     
  }, []);
   
   return (
@@ -46,23 +54,39 @@ export default function Puertas() {
    
       <div className="container">
       <Banner />
-        <PuertasRow titulo="Mis Favoritos">
+   
+        <PuertasRow titulo="Mis Favoritos" mt="3" pt="5">
+       { console.log(puertas)}
 
-          {puertas?.map( puerta => 
-            <PuertaCard
+          {puertas[0]?.map( puerta => 
+            <PuertaCardVertical
                 key= {uuidv4()}
                 url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
                 img={puerta}
-                ratioH={0.5} 
-                ratioW={0.5}  
+                ratioH={0.8} 
+                ratioW={0.8}  
             />
             
             )}
         </PuertasRow>
 
-        <PuertasRow titulo="Seguridad Social">
+        <PuertasRow titulo="Seguridad Social" mt="3">
 
-          {puertas?.map( puerta => 
+          {puertas[1]?.map( puerta => 
+            <PuertaCard
+                key= {uuidv4()}
+                url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
+                img={puerta}
+                ratioH={0.8} 
+                ratioW={0.8}  
+            />
+            
+            )}
+        </PuertasRow>
+
+        <PuertasRow titulo="Ayuntamiento de León" mt="3">
+
+          {puertas[2]?.map( puerta => 
             <PuertaCard
                 key= {uuidv4()}
                 url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 

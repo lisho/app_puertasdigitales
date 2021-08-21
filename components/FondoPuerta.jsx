@@ -9,15 +9,16 @@ const FondoPuerta = ({
   tarjetaFijada,
   isTarjetaGrande
 }) => {
+
+  console.log(height)
   return (
     <>
       <style jsx>{`
         .carddiv {
           height: ${height + "px"};
           width: ${width + "px"};
-          /* max-width: 80vw; */
           background-image: url("${img}");
-          background-position: center;
+          /* background-position: center; */
           background-repeat: no-repeat;
           background-size: cover;
           display: grid;
@@ -26,8 +27,12 @@ const FondoPuerta = ({
           text-align: center;
           position: relative;
           justify-content: center;
+          transform: scaleX(-1);
+          left: -40px;
+          top: -25px;
+          margin-right:-30px;
           border-radius: ${isOpenTarjeta || tarjetaFijada ? "10px 0 0 10px" : "5px"};
-          border: solid 2px rgba(0, 0, 0, 0.8);
+          /* border: solid 2px rgba(0, 0, 0, 0.8); */
         }
 
         .carddiv:hover {

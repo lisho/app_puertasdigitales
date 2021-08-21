@@ -10,12 +10,13 @@ const TarjetaInfoPuerta = ({
     <>
       <Fade in={isOpenTarjeta} animateOpacity >
         {isOpenTarjeta && <Box
-          w={width * 2 + "px"}
+          w={width  + "px"}
           height={height + "px"}
           display="flex"
-          backgroundColor="rgba(255,255,255,1)"
+          /* backgroundColor= {process.env.NEXT_PUBLIC_COLOR_FONDO_TARJETA_ALMACEN} */
+          color = {process.env.NEXT_PUBLIC_COLOR_FONT_TARJETA_ALMACEN}
           borderRadius={isOpenTarjeta ? "0 10px 10px 0" : "5px"}
-          border="solid 2px rgba(0, 0, 0, 0.8)"
+          /* border="solid 2px rgba(0, 0, 0, 0.8)" */
           flexDirection="column"
           justifyContent="center"
           alignItems="center"

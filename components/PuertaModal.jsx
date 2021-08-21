@@ -60,7 +60,7 @@ const PuertaModal = ({ img, isOpen, onClose, onToggleTarjetaFijada, onToggleTarj
                       height="auto"
                       width="auto"
                       display="flex"
-                      boxShadow="2px 2px 5px rgba(0,0,0,.5)"
+                      /* boxShadow="2px 2px 5px rgba(0,0,0,.5)" */
                     />
                   </Link>
                   <Flex ml="3" alignItems="center">

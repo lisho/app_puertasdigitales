@@ -7,10 +7,10 @@ import { v4 as uuidv4 } from 'uuid';
 const valoresIniciales = [
   { titulo: "", descripcion: "", proceso: "", foto: "", video: "" },
 ];
-const ListaDePuertas = ({listaPuertas, setListaPuertas}) => {
+const ListaDePuertas = ({listaPuertas, setListaPuertas, setPuertaParaEditar, onOpen}) => {
 
   useEffect(() => {
-    const lista = traerListaCompleta("http://0.0.0.0:4030/api/puertas");
+    const lista = traerListaCompleta(process.env.NEXT_PUBLIC_URL_API+"puertas");
     lista.then(resultado => setListaPuertas(resultado));
     
   }, []);
@@ -34,7 +34,13 @@ const ListaDePuertas = ({listaPuertas, setListaPuertas}) => {
         <Tbody>
             {listaPuertas.map((puerta) => 
                     
-                    <PuertaListElement puerta={puerta} key={uuidv4()} setListaPuertas={setListaPuertas}/>
+                    <PuertaListElement 
+                      puerta={puerta} 
+                      key={uuidv4()} 
+                      setListaPuertas={setListaPuertas} 
+                      setPuertaParaEditar={setPuertaParaEditar}
+                      onOpen={onOpen}
+                    />
                 )
             } 
         </Tbody>

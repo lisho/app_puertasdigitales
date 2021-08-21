@@ -13,6 +13,10 @@ import {
   Button,
 } from "@chakra-ui/react";
 
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+
+
 const FormularioPuerta = ({
   isOpen,
   onOpen,
@@ -25,9 +29,17 @@ const FormularioPuerta = ({
   setFormValues,
   valoresIniciales,
 }) => {
+
+  const [valueProceso, setValueProceso] = useState('');
   const initialRef = useRef();
 
   const {titulo, descripcion, proceso, foto, video} = formValues;
+
+  useEffect(() => {
+    
+    setValueProceso(proceso);
+
+  }, [proceso]);
 
   const handleInputChange = (e) => {
     const changedFormValues = {
@@ -38,14 +50,20 @@ const FormularioPuerta = ({
   };
 
   const handleSubmit = () => {
+    
+    const formValuesCompletos = {
+      ...formValues,
+      "proceso" : valueProceso
+    }
 
     if (puertaParaEditar) {
-      handleEditar(formValues);
+      handleEditar(formValuesCompletos);
     } else {
-      handleAdd(formValues);
+      handleAdd(formValuesCompletos);
     }
     console.log("Nueva tarea enviada...");
-    setFormValues(valoresIniciales);
+    setFormValues(valoresIniciales); 
+    setValueProceso("")
   };
 
   const handleCancelar = () => {
@@ -85,7 +103,6 @@ const FormularioPuerta = ({
             <FormControl>
               <FormLabel>Descripción</FormLabel>
               <Input
-                ref={initialRef}
                 placeholder="Descripción de la puerta"
                 value={descripcion}
                 name="descripcion"
@@ -95,19 +112,19 @@ const FormularioPuerta = ({
 
             <FormControl>
               <FormLabel>Proceso</FormLabel>
-              <Input
-                ref={initialRef}
+             {/*  <Input
                 placeholder="Explicación del proceso"
                 value={proceso}
                 name="proceso"
                 onChange={(e) => handleInputChange(e)}
-              />
+              /> */}
+              <ReactQuill theme="snow" value={valueProceso} onChange={setValueProceso}/>
+            
             </FormControl>
 
             <FormControl>
               <FormLabel>Añade una captura de la web de referencia</FormLabel>
               <Input
-                ref={initialRef}
                 placeholder="Añade Captura"
                 value={foto}
                 name="foto"
@@ -118,7 +135,6 @@ const FormularioPuerta = ({
             <FormControl>
               <FormLabel>Enlaza píldora de vídeo</FormLabel>
               <Input
-                ref={initialRef}
                 placeholder="Enlaza píldora de vídeo"
                 value={video}
                 name="video"

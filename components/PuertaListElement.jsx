@@ -1,17 +1,25 @@
 import { Box, Button, Flex, Td, Text, Tr } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import borrarElementoEnBd from "../helpers/borrarElementoEnBD";
+import BotonDeleteConfirm from "./BotonDeleteConfirm";
 
 
-const PuertaListElement = ({puerta, setListaPuertas}) => {
+const PuertaListElement = ({puerta, setListaPuertas, setPuertaParaEditar, onOpen}) => {
     const {id, titulo, descripcion, proceso, foto, video} = puerta;
     const html = () => {return {__html:proceso}};
 
     const handleBorrar = () => {
 
-        borrarElementoEnBd("http://0.0.0.0:4030/api/puertas/"+id, setListaPuertas)
+        borrarElementoEnBd(process.env.NEXT_PUBLIC_URL_API+"puertas/"+id, setListaPuertas);
 
     }
+
+    const handleEditar = (puerta) => {
+        console.log(puerta)
+        setPuertaParaEditar(puerta);
+        onOpen();
+    }
+    
 
     return (
         
@@ -42,9 +50,11 @@ const PuertaListElement = ({puerta, setListaPuertas}) => {
 
             </Td>
             <Td m="2">
-            <Button m="2">editar</Button>
-            <Button onClick={() => handleBorrar()}>borrar</Button>
-
+            <Button m="2" onClick={()=> handleEditar(puerta)}>editar</Button>
+            {/* <Button onClick={() => handleBorrar()}>borrar</Button> */}
+            <BotonDeleteConfirm 
+                handleBorrar={handleBorrar}
+            />
             </Td>
         </Tr>
     );

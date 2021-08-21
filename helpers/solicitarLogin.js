@@ -1,7 +1,7 @@
 
 export const solicitarLogin = async (credenciales) => {
 
-    const login = await fetch("http://0.0.0.0:4030/api/usuarios/login", {
+    const login = await fetch(process.env.NEXT_PUBLIC_URL_API+"usuarios/login", {
         method: "POST",
         body: JSON.stringify(credenciales), 
         headers: {

@@ -13,10 +13,13 @@ function getRandomColor() {
   for (var i = 0; i < 6; i++) {
     color += letters[Math.floor(Math.random() * 16)];
   }
+  /* Array de colores:
+  const colorinchis = ["#C96B87", "#286280", "#6A9A77", "002E2C", "#608CA1", "#5B1236", "#3B5669", "#171D2F", "#6F4C6D"]
+  */
   return color;
 }
 
-const PuertaCard = ({ ratioH = 1, ratioW = 1, url, img }) => {
+const PuertaCardVertical = ({ ratioH = 1, ratioW = 1, url, img }) => {
   const [height, setHeight] = useState(null);
   const [width, setWidth] = useState(null);
   const { isOpen: tarjetaFijada, onToggle: onToggleTarjetaFijada } = useDisclosure({defaultIsOpen:true});
@@ -70,16 +73,20 @@ const PuertaCard = ({ ratioH = 1, ratioW = 1, url, img }) => {
       <style jsx>{`
         .card {
     
-          /* height: ${height + "px"}; */
-          
+          height: ${1.4*height + "px"}; 
+          width: ${width*1 + "px"};
           background-color:${colorTarjeta};
           transition: transform 450ms ease;
-          box-shadow: 4px 4px 3px rgba(0, 0, 0, 0.5);
+          box-shadow: 4px 4px 3px rgba(0, 0, 0, 0.5); 
           align-items: center;
           display: flex;
           border-radius: 10px /* ${isTarjetaGrande ? "10px" : "5px"} */;
+          display: flex;
+          flex-direction: column;
           border: 1px solid #1c1c1c;
-
+          /* margin: 25px 0; */
+          padding:5px 5px 5px 5px;
+          {/* clip-path: polygon(0 46%, 100% 0, 100% 100%, 0% 100%); */}
         }
 
         .card:hover {
@@ -96,7 +103,7 @@ const PuertaCard = ({ ratioH = 1, ratioW = 1, url, img }) => {
         display="flex"
         alignItems="flex-end"
         pt="5"
-        ml="12"
+        ml="5"
         flexDirection="column"
         justifyContent="center"
         transition="all 450ms ease"
@@ -111,8 +118,8 @@ const PuertaCard = ({ ratioH = 1, ratioW = 1, url, img }) => {
       >
         <div className=" card">
           <FondoPuerta
-            height={height}
-            width={width}
+            height={height*0.6}
+            width={width*0.6}
             img={img}
             isOpenTarjeta={isOpenTarjeta}
             tarjetaFijada={tarjetaFijada}
@@ -120,8 +127,8 @@ const PuertaCard = ({ ratioH = 1, ratioW = 1, url, img }) => {
           />
 
           <TarjetaInfoPuerta
-            height={height}
-            width={width}
+            height="100%"
+            width="100%"
             isOpenTarjeta={isOpenTarjeta}
           >
 
@@ -149,4 +156,4 @@ const PuertaCard = ({ ratioH = 1, ratioW = 1, url, img }) => {
   );
 };
 
-export default PuertaCard;
+export default PuertaCardVertical;

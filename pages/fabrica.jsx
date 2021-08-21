@@ -5,6 +5,7 @@ import FabricaBanner from "../components/FabricaBanner";
 import FormularioPuerta from "../components/FormularioPuerta";
 import ListaDePuertas from "../components/ListaDePuertas";
 import crearNuevoElementoEnBd from "../helpers/crearNuevoElementoEnBD";
+import editarElementoEnBd from "../helpers/editarElementoEnBD";
 
 const valoresIniciales = {
   titulo: "",
@@ -35,16 +36,20 @@ const fabrica = () => {
     console.log(puerta)
     
     crearNuevoElementoEnBd(
-      "http://0.0.0.0:4030/api/puertas/",
+      process.env.NEXT_PUBLIC_URL_API+"puertas/",
       nuevaPuerta,
       setListaPuertas,
       listaPuertas
     );
-    
-   /*  setListaPuertas([
-      ...listaPuertas,
-      puerta]
-    ) */
+
+    onClose();
+  };
+
+  const handleEditar = (puertaEditada) => {
+
+    editarElementoEnBd(process.env.NEXT_PUBLIC_URL_API+"puertas/"+puertaEditada.id, puertaEditada, setListaPuertas);
+
+    setPuertaParaEditar(null);
     onClose();
   };
 
@@ -83,11 +88,13 @@ const fabrica = () => {
             <ListaDePuertas 
               listaPuertas ={listaPuertas}
               setListaPuertas ={setListaPuertas}
+              setPuertaParaEditar ={setPuertaParaEditar}
+              onOpen={onOpen}
             />
           </Flex>
         </Box>
       </div>
-
+      
       <FormularioPuerta
         isOpen={isOpen}
         onClose={onClose}
@@ -95,6 +102,7 @@ const fabrica = () => {
         formValues={formValues}
         setFormValues={setFormValues}
         handleAdd={handleAdd}
+        handleEditar={handleEditar}
         valoresIniciales={valoresIniciales}
         puertaParaEditar={puertaParaEditar}
         setPuertaParaEditar={setPuertaParaEditar}
