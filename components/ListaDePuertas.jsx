@@ -17,9 +17,7 @@ const ListaDePuertas = ({listaPuertas, setListaPuertas, setPuertaParaEditar, onO
 
 
   return (
-    
-    <Flex>
-
+  
     <Table variant="simple">
         <TableCaption>Puertas digitales creadas</TableCaption>
         <Thead>
@@ -46,7 +44,7 @@ const ListaDePuertas = ({listaPuertas, setListaPuertas, setPuertaParaEditar, onO
         </Tbody>
     </Table>
 
-    </Flex>
+
     ) 
 
 };

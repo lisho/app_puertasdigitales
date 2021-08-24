@@ -3,9 +3,9 @@ import { AddIcon, SmallAddIcon } from "@chakra-ui/icons";
 import { Box, Button, Flex, Text, useDisclosure } from "@chakra-ui/react";
 import FabricaBanner from "../components/FabricaBanner";
 import FormularioPuerta from "../components/FormularioPuerta";
-import ListaDePuertas from "../components/ListaDePuertas";
 import crearNuevoElementoEnBd from "../helpers/crearNuevoElementoEnBD";
 import editarElementoEnBd from "../helpers/editarElementoEnBD";
+import ListaDePuertasDataTableUi from "../components/ListaDePuertasDataTableUi";
 
 const valoresIniciales = {
   titulo: "",
@@ -85,11 +85,18 @@ const fabrica = () => {
                 Nueva Puerta
               </Button>
             </Box>
-            <ListaDePuertas 
+            {/* <ListaDePuertas 
               listaPuertas ={listaPuertas}
               setListaPuertas ={setListaPuertas}
               setPuertaParaEditar ={setPuertaParaEditar}
               onOpen={onOpen}
+            /> */}
+
+            <ListaDePuertasDataTableUi 
+                listaPuertas ={listaPuertas}
+                setListaPuertas ={setListaPuertas}
+                setPuertaParaEditar ={setPuertaParaEditar}
+                onOpen={onOpen}
             />
           </Flex>
         </Box>

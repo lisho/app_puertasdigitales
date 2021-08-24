@@ -1,4 +1,5 @@
 import Head from "next/head";
+/* import Html from "next/html"; */
 import styles from "../styles/Home.module.css";
 import FooterPrincipal from "../components/FooterPrincipal";
 import Navbar from "../components/Navbar";
@@ -6,8 +7,10 @@ import { LoginProvider } from "../contextos/LoginProvider";
 
 function DefaultLayout({ children }) {
   return (
+  
     <div className={styles.container}>
       <Head>
+
         <title>Almacén de Puertas Digitales</title>
         <meta
           name="description"
@@ -15,7 +18,7 @@ function DefaultLayout({ children }) {
         />
         <meta name="viewport" content="width=device-width " />
         <meta name="charset" content="utf-8 " />
-       
+      
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <LoginProvider>
@@ -27,6 +30,7 @@ function DefaultLayout({ children }) {
         </footer>
       </LoginProvider>
     </div>
+
   );
 }
 

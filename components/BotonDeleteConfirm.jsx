@@ -15,19 +15,19 @@ const BotonDeleteConfirm = ({handleBorrar}) => {
           m={4} p={2}>Eliminar</Button>
 
         <Modal onClose={onClose} isOpen={isOpen}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Borrar un registro</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            ¿Realmente quieres eliminar este registro?
-          </ModalBody>
-          <ModalFooter>
-            <Button onClick={()=> handleClick()} m="2">Eliminar</Button>
-            <Button onClick={onClose} m="2">Cancelar</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Borrar un registro</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              ¿Realmente quieres eliminar este registro?
+            </ModalBody>
+            <ModalFooter>
+              <Button onClick={()=> handleClick()} m="2">Eliminar</Button>
+              <Button onClick={onClose} m="2">Cancelar</Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
 </>
 
     );
