@@ -7,10 +7,8 @@ import { LoginProvider } from "../contextos/LoginProvider";
 
 function DefaultLayout({ children }) {
   return (
-  
     <div className={styles.container}>
       <Head>
-
         <title>Almacén de Puertas Digitales</title>
         <meta
           name="description"
@@ -18,8 +16,12 @@ function DefaultLayout({ children }) {
         />
         <meta name="viewport" content="width=device-width " />
         <meta name="charset" content="utf-8 " />
-      
+
         <link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Roboto:wght@500&display=swap" rel="stylesheet"></link>
+        
       </Head>
       <LoginProvider>
         <Navbar />
@@ -30,7 +32,6 @@ function DefaultLayout({ children }) {
         </footer>
       </LoginProvider>
     </div>
-
   );
 }
 

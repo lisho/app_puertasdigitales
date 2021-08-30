@@ -85,7 +85,7 @@ const FormularioPuerta = ({
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>
-            {puertaParaEditar ? "Editar usuario" : "Crear nuevo usuario"}
+            {puertaParaEditar ? "Editar Puerta" : "Crear una nueva puerta"}
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>

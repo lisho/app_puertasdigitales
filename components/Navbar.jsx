@@ -66,20 +66,28 @@ const Navbar = () => {
           </Box>
         </MenuButton>
         <MenuList id="btn-perfil-menulist">
-          <MenuItem keyid="menuItem1">Download</MenuItem>
-          <MenuItem keyid="menuItem2">Create a Copy</MenuItem>
-          <MenuItem keyid="menuItem3">Mark as Draft</MenuItem>
-
+          <MenuItem keyid="menuItem1" key="menuItem1">Download</MenuItem>
+          <MenuItem keyid="menuItem2" key="menuItem2">Create a Copy</MenuItem>
+          
           {usuarioLogueado.rol == "admin" 
-            &&  <MenuItem 
-                  keyid="menuItem4"
+            &&  
+            <>
+              <MenuItem 
+                  keyid="menuItem4" keyid="menuItem4"
                   onClick={()=> router.route ==="/fabrica" ? router.push('/puertas') : router.push('/fabrica')}
                   >
                     {router.route ==="/fabrica" ? "Almacén de puertas" : "Fábrica de puertas"}
                 </MenuItem>
+                <MenuItem 
+                  keyid="menuItem3" keyid="menuItem3"
+                  onClick={()=> router.route ==="/etiquetas" ? router.push('/puertas') : router.push('/etiquetas')}
+                  >
+                    {router.route ==="/etiquetas" ? "Almacén de puertas" : "Gestión de Etiquetas"}
+                </MenuItem>
+            </>
           }
 
-          <MenuItem keyid="menuItem5" onClick={() =>logOut()}>Cerrar Sesion </MenuItem>
+          <MenuItem keyid="menuItem5" keyid="menuItem5" onClick={() =>logOut()}>Cerrar Sesion </MenuItem>
         </MenuList>
       </Menu> 
     </Box>

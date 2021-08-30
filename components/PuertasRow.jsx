@@ -1,6 +1,7 @@
-import { Box, Heading } from "@chakra-ui/react";
+import { Box, Divider, Heading } from "@chakra-ui/react";
 import { useRef } from "react";
 import useDragScroll from "use-drag-scroll";
+import VerComoGrid from "./VerComoGrid";
 
 const PuertasRow = ({ children, titulo }) => {
   const rowRef = useRef(null);
@@ -15,14 +16,15 @@ const PuertasRow = ({ children, titulo }) => {
       <style jsx>{`
         .puertas-row {
           display: flex;
-          /* overflow-y: hidden; */
+          transition: all 450ms ease;
+          /* overflow-y: visible; */
           overflow-x: scroll;
-          padding: 30px;
+          padding: 55px 50px;
           -ms-overflow-style: none; /* IE and Edge */
           scrollbar-width: none; /* Firefox */
-          /* scroll-snap-type: x proximity; */
-          margin-bottom:30px;
-          height: 110%;
+          croll-snap-type: x proximity;
+          /*  margin-bottom:30px; */
+          /* height: 110%; */
         }
 
         .puertas-row::-webkit-scrollbar {
@@ -30,10 +32,25 @@ const PuertasRow = ({ children, titulo }) => {
         }
       `}</style>
 
-      <Box w="100%" pl="50px" color="white">
+      <Box
+        w="100%"
+       /*  pl="50px"
+        pr="50px" */
+        pl="3%"
+        pr="3%"
+        color="white"
+        display="flex"
+        alignItems="center"
+        justifyContent="space-between"
+      >
         <Heading as="h2" size="xl" mt="3">
           {titulo}
         </Heading>
+        <VerComoGrid />
+      </Box>
+      <Box pl="3%"
+        pr="3%">
+        <Divider />
       </Box>
 
       <div className="puertas-row" ref={rowRef}>

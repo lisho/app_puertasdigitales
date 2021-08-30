@@ -1,12 +1,6 @@
 import {
   Box,
-  Flex,
-  Table,
-  TableCaption,
-  Tbody,
-  Th,
-  Thead,
-  Tr,
+  
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import traerListaCompleta from "../helpers/traerListaCompleta";
@@ -108,7 +102,7 @@ const ListaDePuertasDataTableUi = ({
   return (
     <Box m="5">
       <MUIDataTable
-        title={"Employee List"}
+        title={"Puertas digitales creadas"}
         data={listaPuertas}
         columns={columnas}
         options={options}
