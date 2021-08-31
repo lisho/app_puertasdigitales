@@ -7,7 +7,7 @@ import StarIcon from "./iconos/StarIcon";
 
 const ScoreGroup = ({score, color = "#ffd42a"}) => {
     
-    const refs = useRef([])
+    /* const refs = useRef([]) */
     useEffect(() => {
 
         
@@ -25,7 +25,7 @@ const ScoreGroup = ({score, color = "#ffd42a"}) => {
                         fill={color}  
                         key={uuidv4()} 
                         m="0.5"
-                        ref={(ref) => refs.current.push(ref)}
+                       /*  ref={(ref) => refs.current.push(ref)} */
                     />);
             }
             totalEstrellas = totalEstrellas-Math.round(score);
@@ -38,7 +38,7 @@ const ScoreGroup = ({score, color = "#ffd42a"}) => {
                     fill={color} 
                     key={uuidv4()} 
                     m="0.5"
-                    ref={(ref) => refs.current.push(ref)}
+                   /*  ref={(ref) => refs.current.push(ref)} */
                 />)
             totalEstrellas--;
             console.log(` totalEstrellas`,  totalEstrellas)
@@ -50,7 +50,7 @@ const ScoreGroup = ({score, color = "#ffd42a"}) => {
                     fill={"grey"}  
                     key={uuidv4()} 
                     m="0.5"
-                    ref={(ref) => refs.current.push(ref)}
+                    /* ref={(ref) => refs.current.push(ref)} */
                 />)
            
         }

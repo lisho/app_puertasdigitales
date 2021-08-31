@@ -1,5 +1,5 @@
 import {
-  Box,
+  Box, Tag,
   
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
@@ -18,9 +18,9 @@ const ListaDePuertasDataTableUi = ({
 
   useEffect(() => {
     const lista = traerListaCompleta(
-      process.env.NEXT_PUBLIC_URL_API + "puertas"
+      process.env.NEXT_PUBLIC_URL_API + "puertas/etiquetadas/"
     );
-    lista.then((resultado) => setListaPuertas(resultado));
+    lista.then((resultado) => setListaPuertas(resultado) );
   }, []);
 
   /***** COLUMNAS *****/
@@ -46,6 +46,21 @@ const ListaDePuertasDataTableUi = ({
     "foto",
     "video",
     {
+      name: 'Etiquetas',
+      options: {
+        filter: true,
+        filterType: 'multiselect',
+        customBodyRenderLite: (dataIndex) => {
+          console.log(`dataIndex`, listaPuertas[dataIndex].etiqueta)
+          let value = listaPuertas[dataIndex].etiqueta;
+          return value.map((val, key) => {
+            return <Tag  key={key} m={1}>{val.etiqueta}</Tag>; 
+            console.log(`Valores de etiquetas`, val)
+          });
+        },
+      } 
+    },
+    {
       name: "Editar",
       options: {
         filter: false,
@@ -69,6 +84,8 @@ const ListaDePuertasDataTableUi = ({
   const options = {
     resizableColumns: resizableColumns,
     onRowsDelete:(e, newTableData)=>{handleBorrar(e.data, newTableData)},
+    filter: true,
+    filterArrayFullMatch: false,
     /* selectableRows:'single', */
   };
 

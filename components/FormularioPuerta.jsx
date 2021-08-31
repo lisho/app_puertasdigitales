@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic";
 
 import {
   Modal,
@@ -13,34 +13,61 @@ import {
   FormLabel,
   Input,
   Button,
+  Checkbox,
+  Flex,
+  Wrap,
+  Grid,
+  Box,
+  Text,
+  Divider,
 } from "@chakra-ui/react";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
-import 'react-quill/dist/quill.snow.css';
+import "react-quill/dist/quill.snow.css";
+import traerListaCompleta from "../helpers/traerListaCompleta";
+import filtrarUnArrayPorId from "../helpers/filtrarUnArrayPorId";
 
 const FormularioPuerta = ({
   isOpen,
   onOpen,
   onClose,
-  handleAdd, 
+  handleAdd,
   handleEditar,
-  puertaParaEditar, 
+  puertaParaEditar,
   setPuertaParaEditar,
   formValues,
   setFormValues,
   valoresIniciales,
 }) => {
-
-  const [valueProceso, setValueProceso] = useState('');
+  const [valueProceso, setValueProceso] = useState("");
   const initialRef = useRef();
-
-  const {titulo, descripcion, proceso, foto, video} = formValues;
+  const [todasEtiquetas, setTodasEtiquetas] = useState([]);
+  const [etiquetaTipos, setEtiquetaTipos] = useState([]);
+  const { titulo, descripcion, proceso, foto, video } = formValues;
+  /* const etiquetasRef = useRef([]) */
 
   useEffect(() => {
-    
     setValueProceso(proceso);
-
   }, [proceso]);
+
+  /*   useEffect(() => {
+    crearEtiquetas();
+    console.log(`etiquetasRef`, etiquetasRef)
+  }, []) */
+
+  useEffect(() => {
+    const lista = traerListaCompleta(
+      process.env.NEXT_PUBLIC_URL_API + "etiquetas"
+    );
+    lista.then((resultado) => setTodasEtiquetas(resultado));
+  }, []);
+
+  useEffect(() => {
+    const lista = traerListaCompleta(
+      process.env.NEXT_PUBLIC_URL_API + "etiquetaTipos"
+    );
+    lista.then((resultado) => setEtiquetaTipos(resultado));
+  }, []);
 
   const handleInputChange = (e) => {
     const changedFormValues = {
@@ -51,11 +78,10 @@ const FormularioPuerta = ({
   };
 
   const handleSubmit = () => {
-    
     const formValuesCompletos = {
       ...formValues,
-      "proceso" : valueProceso
-    }
+      proceso: valueProceso,
+    };
 
     if (puertaParaEditar) {
       handleEditar(formValuesCompletos);
@@ -63,8 +89,8 @@ const FormularioPuerta = ({
       handleAdd(formValuesCompletos);
     }
     console.log("Nueva tarea enviada...");
-    setFormValues(valoresIniciales); 
-    setValueProceso("")
+    setFormValues(valoresIniciales);
+    setValueProceso("");
   };
 
   const handleCancelar = () => {
@@ -79,9 +105,43 @@ const FormularioPuerta = ({
     console.log("Valores del formulario...", formValues);
   }, [puertaParaEditar]);
 
+  const crearEtiquetas = () => {
+    const etiquetas = [];
+    const etiquetasDeEstaPuerta = puertaParaEditar?.etiqueta;
+
+    etiquetaTipos.map((tipo) => {
+      etiquetas.push(
+        <Box m="8">
+          <Text as="i" mt="5" mb="5">
+            {tipo.tipo}
+          </Text>
+          <Divider />
+          <Grid templateColumns="repeat(2, 1fr)" gap={4} mt="5">
+            {tipo.etiqueta.map((etiqueta) => (
+              <Checkbox
+                defaultIsChecked={filtrarUnArrayPorId(
+                  etiquetasDeEstaPuerta,
+                  etiqueta.id
+                )}
+              >
+                {etiqueta.etiqueta}
+              </Checkbox>
+            ))}
+          </Grid>
+        </Box>
+      );
+    });
+    return etiquetas;
+  };
+
   return (
     <>
-      <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>
+      <Modal
+        initialFocusRef={initialRef}
+        size="3xl"
+        isOpen={isOpen}
+        onClose={onClose}
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>
@@ -89,7 +149,6 @@ const FormularioPuerta = ({
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
-            
             <FormControl>
               <FormLabel>Titulo</FormLabel>
               <Input
@@ -101,7 +160,7 @@ const FormularioPuerta = ({
               />
             </FormControl>
 
-            <FormControl>
+            <FormControl mt={3}>
               <FormLabel>Descripción</FormLabel>
               <Input
                 placeholder="Descripción de la puerta"
@@ -111,19 +170,17 @@ const FormularioPuerta = ({
               />
             </FormControl>
 
-            <FormControl>
+            <FormControl mt={3}>
               <FormLabel>Proceso</FormLabel>
-             {/*  <Input
-                placeholder="Explicación del proceso"
-                value={proceso}
-                name="proceso"
-                onChange={(e) => handleInputChange(e)}
-              /> */}
-              <ReactQuill theme="snow" value={valueProceso} onChange={setValueProceso}/>
-            
+
+              <ReactQuill
+                theme="snow"
+                value={valueProceso}
+                onChange={setValueProceso}
+              />
             </FormControl>
 
-            <FormControl>
+            <FormControl mt={3}>
               <FormLabel>Añade una captura de la web de referencia</FormLabel>
               <Input
                 placeholder="Añade Captura"
@@ -133,7 +190,7 @@ const FormularioPuerta = ({
               />
             </FormControl>
 
-            <FormControl>
+            <FormControl mt={3}>
               <FormLabel>Enlaza píldora de vídeo</FormLabel>
               <Input
                 placeholder="Enlaza píldora de vídeo"
@@ -143,6 +200,11 @@ const FormularioPuerta = ({
               />
             </FormControl>
 
+            <FormControl mt={8}>
+              <FormLabel>Etiquetas</FormLabel>
+
+              {crearEtiquetas()}
+            </FormControl>
           </ModalBody>
 
           <ModalFooter>

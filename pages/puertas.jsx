@@ -6,6 +6,7 @@ import PuertasRow from "../components/PuertasRow";
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import PuertaCardPrueba from "../components/PuertaCard";
+import traerListaCompleta from "../helpers/traerListaCompleta";
 
 const randomNumPuerta = () => {
   const array = [];
@@ -21,15 +22,20 @@ const randomNumPuerta = () => {
 };
 
 let valores_iniciales = [];
-for (let i = 0; i < 6; i++) {
+ for (let i = 0; i < 6; i++) {
   valores_iniciales = [...valores_iniciales, randomNumPuerta()];
 }
-
+ 
 export default function Puertas() {
   /*  const [numPuerta, setnumPuerta] = useState(randomNumPuerta()) */
   const [puertas, setPuertas] = useState(valores_iniciales);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+  /*   const lista = traerListaCompleta(
+      process.env.NEXT_PUBLIC_URL_API + "puertas/etiquetadas"
+    );
+    lista.then((resultado) => setPuertas(resultado)); */
+  }, []);
 
   return (
     <>
@@ -47,7 +53,9 @@ export default function Puertas() {
       <div className="container">
         <Banner />
 
-        <PuertasRow titulo="Mis Favoritos" mt="3" pt="5">
+        {console.log(`puertas`, puertas)}
+
+         <PuertasRow titulo="Mis Favoritos" mt="3" pt="5">
           {console.log(puertas)}
 
           {puertas[0]?.map((puerta) => (
@@ -109,226 +117,7 @@ export default function Puertas() {
           ))}
         </PuertasRow>
 
-        {/* <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-                ratioH={0.8} 
-              ratioW={0.8} 
-          />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-                ratioH={0.8} 
-              ratioW={0.8} 
-          />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-                ratioH={0.8} 
-              ratioW={0.8} 
-          />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-                ratioH={0.8} 
-              ratioW={0.8} 
-          />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-                ratioH={0.8} 
-              ratioW={0.8} 
-          />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-                ratioH={0.8} 
-              ratioW={0.8} 
-          />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-                ratioH={0.8} 
-              ratioW={0.8} 
-          />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-                ratioH={0.8} 
-              ratioW={0.8} 
-          />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-                ratioH={0.8} 
-              ratioW={0.8} 
-          />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-                ratioH={0.8} 
-              ratioW={0.8} 
-          />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-                ratioH={0.8} 
-              ratioW={0.8} 
-          />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-                ratioH={0.8} 
-              ratioW={0.8} 
-          />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-                ratioH={0.8} 
-              ratioW={0.8} 
-          />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-                ratioH={0.8} 
-              ratioW={0.8} 
-          /> 
-        </PuertasRow>
-       
-        <PuertasRow titulo="Puertas Recomendadas">
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-              ratioH={1.5} 
-              ratioW={1.5} 
-            />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-              ratioH={1.5} 
-              ratioW={1.5} 
-            />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-              ratioH={1.5} 
-              ratioW={1.5} 
-            />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-              ratioH={1.5} 
-              ratioW={1.5} 
-            />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-              ratioH={1.5} 
-              ratioW={1.5} 
-            />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-              ratioH={1.5} 
-              ratioW={1.5} 
-            />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-              ratioH={1.5} 
-              ratioW={1.5} 
-            />
-        </PuertasRow>
-
-        <PuertasRow titulo="Ayuntamiento de León">
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-          />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-          />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-          />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-          />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-          />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-          />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-          />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-          />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-          />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-          />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-          />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-          />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-          />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-          />
-        </PuertasRow>
-
-        <PuertasRow titulo="Seguridad Social">
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-          />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-          />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-          />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-          />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-          />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-          />
-          <PuertaCard
-              url="https://www.seg-social.es/wps/portal/wss/internet/Inicio" 
-              img={numPuerta}
-          />
-        </PuertasRow> */}
+    
       </div>
     </>
   );
