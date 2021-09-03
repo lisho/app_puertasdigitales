@@ -13,6 +13,7 @@ const valoresIniciales = {
   proceso: "",
   foto: "",
   video: "",
+  etiqueta: []
 };
 
 const fabrica = () => {
@@ -21,20 +22,29 @@ const fabrica = () => {
   const [puertaParaEditar, setPuertaParaEditar] = useState(null); // Se llena cuando hay una tarea para editar
   const [listaPuertas, setListaPuertas] = useState([]);
 
+  /**
+   * Abre el modal con el formulario reiniciando los valores de los campos del formulario
+   */
   const abrirModalFormularioCrear = () => {
     setFormValues(valoresIniciales);
     onOpen();
   };
+
+  /**
+   * Crea una nuava puerta en la base de datos (por ahora sin etiquetas) 
+   * @param {object} 
+   * recibe los datos de la puerta que se va a crear en la base de datos
+   **/
 
   const handleAdd = (puerta) => {
     const nuevaPuerta = {
       ...puerta,
       
     };
-
+/* 
     console.log(nuevaPuerta);
     console.log(puerta)
-    
+     */
     crearNuevoElementoEnBd(
       process.env.NEXT_PUBLIC_URL_API+"puertas/",
       nuevaPuerta,
@@ -44,6 +54,12 @@ const fabrica = () => {
 
     onClose();
   };
+
+  /**
+   * Edita una nueva puerta en la base de datos (por ahora sin etiquetas)
+   * @param {object} 
+   * recibe los datos de la puerta ya actualizados para enviar a lam BD
+   **/
 
   const handleEditar = (puertaEditada) => {
 
@@ -85,13 +101,7 @@ const fabrica = () => {
                 Nueva Puerta
               </Button>
             </Box>
-            {/* <ListaDePuertas 
-              listaPuertas ={listaPuertas}
-              setListaPuertas ={setListaPuertas}
-              setPuertaParaEditar ={setPuertaParaEditar}
-              onOpen={onOpen}
-            /> */}
-
+          
             <ListaDePuertasDataTableUi 
                 listaPuertas ={listaPuertas}
                 setListaPuertas ={setListaPuertas}
@@ -106,15 +116,18 @@ const fabrica = () => {
         isOpen={isOpen}
         onClose={onClose}
         onOpen={onOpen}
+
         formValues={formValues}
         setFormValues={setFormValues}
+
         handleAdd={handleAdd}
         handleEditar={handleEditar}
+
         valoresIniciales={valoresIniciales}
+
         puertaParaEditar={puertaParaEditar}
         setPuertaParaEditar={setPuertaParaEditar}
-        listaPuertas ={listaPuertas}
-        setListaPuertas ={setListaPuertas}
+
       />
     </>
   );

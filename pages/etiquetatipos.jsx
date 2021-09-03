@@ -5,7 +5,7 @@ import FabricaBanner from "../components/FabricaBanner";
 import crearNuevoElementoEnBd from "../helpers/crearNuevoElementoEnBD";
 import editarElementoEnBd from "../helpers/editarElementoEnBD";
 import ListaDeEtiquetasDataTableUi from "../components/ListaDeEtiquetasDataTableUi";
-import FormularioEtiquetas from "../components/FormularioEtiquetas";
+import FormularioTiposEtiquetas from "../components/FormularioTiposEtiquetas";
 
 const valoresIniciales = {
   etiqueta: "",
@@ -68,7 +68,7 @@ console.log(`nuevaEtiqueta`, nuevaEtiqueta)
         >
           <Flex direction="column" mt="5" justifyContent="center">
             <Text as="h2" fontSize="3xl" align="center" color="teal">
-              Lista etiquetas creadas
+              Lista de tipos de etiquetas disponibles
             </Text>
             <Box align="center">
               <Button
@@ -77,7 +77,7 @@ console.log(`nuevaEtiqueta`, nuevaEtiqueta)
                 variant="solid"
                 onClick={() => abrirModalFormularioCrear()}
               >
-                Nueva Etiqueta
+                Nuevo Tipo de Etiqueta
               </Button>
             </Box>
 
@@ -91,7 +91,7 @@ console.log(`nuevaEtiqueta`, nuevaEtiqueta)
         </Box>
       </div>
 
-      <FormularioEtiquetas
+      <FormularioTiposEtiquetas
         isOpen={isOpen}
         onClose={onClose}
         onOpen={onOpen}

@@ -84,6 +84,12 @@ const Navbar = () => {
                   >
                     {router.route ==="/etiquetas" ? "Almacén de puertas" : "Gestión de Etiquetas"}
                 </MenuItem>
+                <MenuItem 
+                  keyid="menuItem3" keyid="menuItem3"
+                  onClick={()=> router.route ==="/etiquetas" ? router.push('/puertas') : router.push('/etiquetatipos')}
+                  >
+                    {router.route ==="/etiquetas" ? "Almacén de puertas" : "Gestión de Tipos de Etiquetas"}
+                </MenuItem>
             </>
           }
 
