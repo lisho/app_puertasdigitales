@@ -1,11 +1,11 @@
 
 
-const editarElementoEnBd = (url, data, setEstado) => {
+const editarElementoEnBd = (url, data, setEstado, estado, indexParaEditar) => {
 
     console.log(url);
     fetch(url, {
-      method: "PUT", // or 'PUT'
-      body: JSON.stringify(data), // data can be `string` or {object}!
+      method: "PUT", 
+      body: JSON.stringify(data), 
       headers: {
         "Content-Type": "application/json",
       },
@@ -13,7 +13,9 @@ const editarElementoEnBd = (url, data, setEstado) => {
       .then((res) => res.json())
       .catch((error) => console.error("Error:", error))
       .then((response) => {
-        setEstado(response)
+        const items =[...estado];
+        items[indexParaEditar] = response;
+        estado && setEstado([...items])
     
     });
   };

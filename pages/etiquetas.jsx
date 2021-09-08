@@ -18,7 +18,8 @@ const etiquetas = () => {
   const [formValues, setFormValues] = useState(valoresIniciales);
   const [etiquetaParaEditar, setEtiquetaParaEditar] = useState(null); // Se llena cuando hay una etiqueta para editar
   const [listaEtiquetas, setListaEtiquetas] = useState([]); //  se carga con los datos sobre etiquetas de la bd
-  
+  const [indexParaEditar, setIndexParaEditar] = useState(null);
+
   const abrirModalFormularioCrear = () => {
     setFormValues(valoresIniciales);
     onOpen();
@@ -43,9 +44,11 @@ console.log(`nuevaEtiqueta`, nuevaEtiqueta)
     editarElementoEnBd(
       process.env.NEXT_PUBLIC_URL_API + "etiquetas/" + etiquetaEditada.id,
       etiquetaEditada,
-      setListaEtiquetas
+      setListaEtiquetas,
+      listaEtiquetas,
+      indexParaEditar
     );
-
+    setIndexParaEditar(null);
     setEtiquetaParaEditar(null);
     onClose();
   };
@@ -85,6 +88,7 @@ console.log(`nuevaEtiqueta`, nuevaEtiqueta)
               listaEtiquetas={listaEtiquetas}
               setListaEtiquetas={setListaEtiquetas}
               setEtiquetaParaEditar={setEtiquetaParaEditar}
+              setIndexParaEditar={setIndexParaEditar}
               onOpen={onOpen}
             />
           </Flex>

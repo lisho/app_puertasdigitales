@@ -15,6 +15,7 @@ import {
   Select
 } from "@chakra-ui/react";
 import traerListaCompleta from "../helpers/traerListaCompleta";
+import { v4 as uuidv4 } from "uuid";
 
 const FormularioEtiquetas = (
   {isOpen,
@@ -29,17 +30,23 @@ const FormularioEtiquetas = (
   valoresIniciales}
 ) => {
   const initialRef = useRef();
-console.log(formValues)
-  const { etiqueta, descripcion } = formValues;
+
+  const { etiqueta, descripcion, etiquetaTipo } = formValues;
   const [listaTiposEtiqueta, setListaTiposEtiqueta] = useState([]);
 
   const handleInputChange = (e) => {
+
     const changedFormValues = {
       ...formValues,
       [e.target.name]: e.target.value,
+      ["etiquetaTipo"]:listaTiposEtiqueta.find(tipo => tipo.id == e.target.value),     
     };
+
     setFormValues(changedFormValues);
   };
+
+
+  
 
   const handleSubmit = () => {
     const formValuesCompletos = {
@@ -52,8 +59,6 @@ console.log(formValues)
     } else {
       handleAdd(formValuesCompletos);
     }
-    console.log("Nueva tarea enviada...");
-    console.log(`formValuesCompletos`, formValuesCompletos)
     setFormValues(valoresIniciales);
    
   };
@@ -72,10 +77,10 @@ console.log(formValues)
 
   useEffect(() => {
     const listaTipos = traerListaCompleta(
-      process.env.NEXT_PUBLIC_URL_API + "etiquetaTipos"
+      process.env.NEXT_PUBLIC_URL_API + "etiquetaTipos/"
     );
     listaTipos.then((resultado) => setListaTiposEtiqueta(resultado));
-  
+      console.log(`listaTiposEtiqueta`, listaTiposEtiqueta)
   }, []);
 
   return (
@@ -112,12 +117,16 @@ console.log(formValues)
             <FormControl>
               <FormLabel>Etiquetas</FormLabel>
               <Select
-                placeholder="Selecciona un tipo de etiqueta"
+                placeholder={etiquetaTipo? etiquetaTipo.tipo : "Selecciona un tipo de etiqueta"}
                 name="etiquetaTipoId"
+                
                 onChange={(e) => handleInputChange(e)}
               >
+                {/* <option key={uuidv4()} name="" selected="true" disabled="disabled" value={etiquetaTipo?.id}>{etiquetaTipo?.tipo}</option> */}
                { listaTiposEtiqueta.map(tipo => 
-                  <option value={tipo.id}>{tipo.tipo}</option>
+                  etiquetaTipo?.tipo != tipo.tipo &&
+                  <option key={uuidv4()} value={tipo.id}>{tipo.tipo}</option>
+                
                 )}
 
               </Select>

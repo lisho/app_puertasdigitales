@@ -89,7 +89,7 @@ const PuertaCard = ({ ratioH = 1, ratioW = 1, url, img }) => {
       `}</style>
 
       <Center /* py={6} */ mx={2}
-       ref={ref}
+      ref={ref}
       cursor="pointer"
       onClick={() => handleClick()}
       transition="all 450ms ease"
@@ -125,7 +125,7 @@ const PuertaCard = ({ ratioH = 1, ratioW = 1, url, img }) => {
           >
             <Image
               src={
-                "http://www.aytoleon.es/es/ciudad/PublishingImages/7-%20Recursos%20Monumentales/8-%20Ayuntamiento%20de%20San%20Marcelo/aytosanmarcelo[1].jpg"
+                "/imagenes/catedral.jpeg"
               }
               minW={"100%"}
               w={"auto"}

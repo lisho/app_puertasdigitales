@@ -15,6 +15,7 @@ import {
   Select
 } from "@chakra-ui/react";
 import traerListaCompleta from "../helpers/traerListaCompleta";
+import { CirclePicker } from 'react-color';
 
 const FormularioEtiquetas = (
   {isOpen,
@@ -22,15 +23,15 @@ const FormularioEtiquetas = (
   onClose,
   handleAdd,
   handleEditar,
-  etiquetaParaEditar,
-  setEtiquetaParaEditar,
+  tiposEtiquetaParaEditar,
+  setTiposEtiquetaParaEditar,
   formValues,
   setFormValues,
   valoresIniciales}
 ) => {
   const initialRef = useRef();
 console.log(formValues)
-  const { etiqueta, descripcion } = formValues;
+  const { tipo, descripcion, color } = formValues;
   const [listaTiposEtiqueta, setListaTiposEtiqueta] = useState([]);
 
   const handleInputChange = (e) => {
@@ -41,13 +42,23 @@ console.log(formValues)
     setFormValues(changedFormValues);
   };
 
+  const handleColorChange = (e) => {
+    const color = { 
+      target:{
+        name: "color",
+        value: e.hex
+        }
+      }
+      handleInputChange(color);
+  }
+
   const handleSubmit = () => {
     const formValuesCompletos = {
       ...formValues,
       
     };
 
-    if (etiquetaParaEditar) {
+    if (tiposEtiquetaParaEditar) {
       handleEditar(formValuesCompletos);
     } else {
       handleAdd(formValuesCompletos);
@@ -59,16 +70,16 @@ console.log(formValues)
   };
 
   const handleCancelar = () => {
-    setEtiquetaParaEditar(null);
+    setTiposEtiquetaParaEditar(null);
     setFormValues(valoresIniciales);
     onClose();
   };
 
   useEffect(() => {
-    etiquetaParaEditar && setFormValues(etiquetaParaEditar);
-    console.log("Tarea para editar...", etiquetaParaEditar);
+    tiposEtiquetaParaEditar && setFormValues(tiposEtiquetaParaEditar);
+    console.log("Tarea para editar...", tiposEtiquetaParaEditar);
     console.log("Valores del formulario...", formValues);
-  }, [etiquetaParaEditar]);
+  }, [tiposEtiquetaParaEditar]);
 
   useEffect(() => {
     const listaTipos = traerListaCompleta(
@@ -84,17 +95,17 @@ console.log(formValues)
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>
-            {etiquetaParaEditar ? "Editar etiqueta" : "Crear nueva etiqueta"}
+            {tiposEtiquetaParaEditar ? "Editar etiqueta" : "Crear nueva etiqueta"}
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
             <FormControl>
-              <FormLabel>Nombre de la etiqueta</FormLabel>
+              <FormLabel>Nombre del tipo de etiqueta</FormLabel>
               <Input
                 ref={initialRef}
-                placeholder="Nombre de la etiqueta"
-                value={etiqueta}
-                name="etiqueta"
+                placeholder="Tipo de etiqueta"
+                value={tipo}
+                name="tipo"
                 onChange={(e) => handleInputChange(e)}
               />
             </FormControl>
@@ -102,7 +113,7 @@ console.log(formValues)
             <FormControl>
               <FormLabel>Descripción</FormLabel>
               <Input
-                placeholder="Descripción de la etiqueta"
+                placeholder="Descripción del tipo de etiqueta"
                 value={descripcion}
                 name="descripcion"
                 onChange={(e) => handleInputChange(e)}
@@ -110,23 +121,25 @@ console.log(formValues)
             </FormControl>
 
             <FormControl>
-              <FormLabel>Etiquetas</FormLabel>
-              <Select
-                placeholder="Selecciona un tipo de etiqueta"
-                name="etiquetaTipoId"
+              <FormLabel>Color asociado al tipo</FormLabel>
+
+              <CirclePicker 
+                color={ color }
+                onChange={ (e) => handleColorChange(e)} 
+              />
+            {/*   <Input
+                placeholder="selecciona un color"
+                name="color"
+                value={color}
                 onChange={(e) => handleInputChange(e)}
               >
-               { listaTiposEtiqueta.map(tipo => 
-                  <option value={tipo.id}>{tipo.tipo}</option>
-                )}
-
-              </Select>
+              </Input> */}
             </FormControl>
           </ModalBody>
 
           <ModalFooter>
             <Button colorScheme="blue" mr={3} onClick={() => handleSubmit()}>
-              {etiquetaParaEditar ? "Guardar cambios" : "Guardar"}
+              {tiposEtiquetaParaEditar ? "Guardar cambios" : "Guardar"}
             </Button>
             <Button onClick={() => handleCancelar()}>Cancelar</Button>
           </ModalFooter>

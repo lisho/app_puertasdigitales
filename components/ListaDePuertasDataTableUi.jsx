@@ -12,6 +12,7 @@ const ListaDePuertasDataTableUi = ({
   listaPuertas,
   setListaPuertas,
   setPuertaParaEditar,
+  setIndexParaEditar,
   onOpen,
 }) => {
   const [resizableColumns, setResizableColumns] = useState(false);
@@ -46,18 +47,46 @@ const ListaDePuertasDataTableUi = ({
     "foto",
     "video",
     {
-      name: 'Etiquetas',
+      name: 'etiqueta',
+      label: 'Etiquetas',
+      
       options: {
-        filter: true,
+         filter: false,
         filterType: 'multiselect',
-        customBodyRenderLite: (dataIndex) => {
-          console.log(`dataIndex`, listaPuertas[dataIndex].etiqueta)
-          let value = listaPuertas[dataIndex].etiqueta;
-          return value.map((val, key) => {
-            return <Tag  key={key} m={1}>{val.etiqueta}</Tag>; 
-            console.log(`Valores de etiquetas`, val)
-          });
+        filterOptions: {
+          renderValue: val => {
+           console.log(`valFilterOptions`, val)
+          } 
         },
+        customBodyRender: (value, tableMeta, updateValue) => {
+         console.log(`value`, value)
+         console.log(`tableMeta`, tableMeta)
+         console.log(`updateValue`, updateValue)
+
+          return value.map((val, key) => {
+           /*  updateValue(val.etiqueta); */
+            return <Tag 
+              bg={val.etiquetaTipo?.color}  
+              key={key} 
+              m={1} 
+              p={2} 
+              align="center"
+              value={val.etiqueta}
+              index={tableMeta.columnIndex}
+              change={event => updateValue(event)} 
+              >{val.etiqueta}</Tag> }
+            
+          );
+
+        }
+       /*  customBodyRenderLite: (dataIndex) => {
+           console.log(`dataIndex`, listaPuertas[dataIndex]) 
+          let value = listaPuertas[dataIndex]?.etiqueta;
+          return value.map((val, key) => 
+            <Tag bg={val.etiquetaTipo?.color}  key={key} m={1} p={2} align="center">{val.etiqueta}</Tag>
+            
+          );
+        }, */
       } 
     },
     {
@@ -97,13 +126,13 @@ const ListaDePuertasDataTableUi = ({
 
   const handleBorrar = (arrayDeFilasParaBorrar, newTableData) => {
     newTableData = null;
-    console.log(`newTableData`, newTableData)
+    /* console.log(`newTableData`, newTableData) */
    
       arrayDeFilasParaBorrar.map(
 
         filaParaBorrar =>{ 
             let idParaBorrar = listaPuertas[filaParaBorrar.dataIndex].id
-            borrarElementoEnBd(process.env.NEXT_PUBLIC_URL_API+"puertas/"+idParaBorrar, setListaPuertas)}
+            borrarElementoEnBd(process.env.NEXT_PUBLIC_URL_API+"puertas/etiquetadas/"+idParaBorrar, setListaPuertas)}
       ); 
 
   } 
@@ -111,6 +140,7 @@ const ListaDePuertasDataTableUi = ({
   const handleEditar = (dataIndex, rowIndex) => {
    
     let elementoParaEditar = listaPuertas[dataIndex];
+    setIndexParaEditar(dataIndex);
     setPuertaParaEditar(elementoParaEditar);
     onOpen();
    

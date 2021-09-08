@@ -120,7 +120,7 @@ const PuertaCardVertical = ({ ratioH = 1, ratioW = 1, url, img }) => {
             mx={-6}
             mb={6}
             pos={"relative"}
-            bgImage= "http://www.aytoleon.es/es/ciudad/PublishingImages/7-%20Recursos%20Monumentales/8-%20Ayuntamiento%20de%20San%20Marcelo/aytosanmarcelo[1].jpg"
+            bgImage= "/imagenes/segSoc.jpg"
 
           >
             

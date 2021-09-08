@@ -4,49 +4,45 @@ import { Box, Button, Flex, Text, useDisclosure } from "@chakra-ui/react";
 import FabricaBanner from "../components/FabricaBanner";
 import crearNuevoElementoEnBd from "../helpers/crearNuevoElementoEnBD";
 import editarElementoEnBd from "../helpers/editarElementoEnBD";
-import ListaDeEtiquetasDataTableUi from "../components/ListaDeEtiquetasDataTableUi";
+import ListaDeTiposEtiquetasDataTableUi from "../components/ListaDeTiposEtiquetasDataTableUi";
 import FormularioTiposEtiquetas from "../components/FormularioTiposEtiquetas";
 
 const valoresIniciales = {
-  etiqueta: "",
+  tipo: "",
   descripcion: "",
-  etiquetaTipoId: null,
+  color: "",
 };
 
 const etiquetas = () => {
   const { isOpen, onOpen, onClose } = useDisclosure(); // Manejador del modal del formulario de fabrica de etiquetas
   const [formValues, setFormValues] = useState(valoresIniciales);
-  const [etiquetaParaEditar, setEtiquetaParaEditar] = useState(null); // Se llena cuando hay una etiqueta para editar
-  const [listaEtiquetas, setListaEtiquetas] = useState([]); //  se carga con los datos sobre etiquetas de la bd
-  
+  const [tiposEtiquetaParaEditar, setTiposEtiquetaParaEditar] = useState(null); // Se llena cuando hay una etiqueta para editar
+  const [listaTiposEtiquetas, setListaTiposEtiquetas] = useState([]); //  se carga con los datos sobre etiquetas de la bd
+  const [indexParaEditar, setIndexParaEditar] = useState(null);
   const abrirModalFormularioCrear = () => {
     setFormValues(valoresIniciales);
     onOpen();
   };
 
-  const handleAdd = (etiqueta) => {
-    const nuevaEtiqueta = {
-      ...etiqueta,
+  const handleAdd = (tipoEtiqueta) => {
+    const nuevoTipoEtiqueta = {
+      ...tipoEtiqueta,
     };
-console.log(`nuevaEtiqueta`, nuevaEtiqueta)
     crearNuevoElementoEnBd(
-      process.env.NEXT_PUBLIC_URL_API + "etiquetas/",
-      nuevaEtiqueta,
-      setListaEtiquetas,
-      listaEtiquetas
+      process.env.NEXT_PUBLIC_URL_API + "etiquetaTipos/",
+      nuevoTipoEtiqueta,
+      setListaTiposEtiquetas,
+      listaTiposEtiquetas
     );
 
     onClose();
   };
 
-  const handleEditar = (etiquetaEditada) => {
-    editarElementoEnBd(
-      process.env.NEXT_PUBLIC_URL_API + "etiquetas/" + etiquetaEditada.id,
-      etiquetaEditada,
-      setListaEtiquetas
-    );
-
-    setEtiquetaParaEditar(null);
+  const handleEditar = (tipoEtiquetaEditado) => {
+    
+    editarElementoEnBd(process.env.NEXT_PUBLIC_URL_API+"etiquetaTipos/"+tipoEtiquetaEditado.id, tipoEtiquetaEditado, setListaTiposEtiquetas, listaTiposEtiquetas, indexParaEditar);
+    setIndexParaEditar(null);
+    setTiposEtiquetaParaEditar(null);
     onClose();
   };
 
@@ -81,11 +77,12 @@ console.log(`nuevaEtiqueta`, nuevaEtiqueta)
               </Button>
             </Box>
 
-            <ListaDeEtiquetasDataTableUi
-              listaEtiquetas={listaEtiquetas}
-              setListaEtiquetas={setListaEtiquetas}
-              setEtiquetaParaEditar={setEtiquetaParaEditar}
+            <ListaDeTiposEtiquetasDataTableUi
+              listaTiposEtiquetas={listaTiposEtiquetas}
+              setListaTiposEtiquetas={setListaTiposEtiquetas}
+              setTiposEtiquetaParaEditar={setTiposEtiquetaParaEditar}
               onOpen={onOpen}
+              setIndexParaEditar={setIndexParaEditar}
             />
           </Flex>
         </Box>
@@ -100,10 +97,11 @@ console.log(`nuevaEtiqueta`, nuevaEtiqueta)
         handleAdd={handleAdd}
         handleEditar={handleEditar}
         valoresIniciales={valoresIniciales}
-        etiquetaParaEditar={etiquetaParaEditar}
-        setEtiquetaParaEditar={setEtiquetaParaEditar}
-        listaEtiquetas={listaEtiquetas}
-        setListaEtiquetas={setListaEtiquetas}
+        tiposEtiquetaParaEditar={tiposEtiquetaParaEditar}
+        setTiposEtiquetaParaEditar={setTiposEtiquetaParaEditar}
+        /* setIndexParaEditar={setIndexParaEditar} */
+      /*   listaTiposEtiquetas={listaTiposEtiquetas}
+        setListaTiposEtiquetas={setListaTiposEtiquetas} */
       />
     </>
   );

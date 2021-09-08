@@ -17,7 +17,7 @@ const ControlledCheckBox = ({
     const estaEtiqueta = todasEtiquetas.find(
       (etiqueta) => etiqueta.id == e.target.value
     );
-
+      estaEtiqueta.etiquetado = {etiquetumId: estaEtiqueta.id, puertumId: formValues.id}
     if (
       etiquetaIsCheckedActualizado.some(
         (etiqueta) => etiqueta.id == e.target.value
@@ -36,9 +36,9 @@ const ControlledCheckBox = ({
     setEtiquetaIsChecked(etiquetaIsCheckedActualizado);
   };
 
-  useEffect(() => {
+ /*  useEffect(() => {
     console.log(`etiquetaIsChecked`, etiquetaIsChecked);
-  }, [etiquetaIsChecked]);
+  }, [etiquetaIsChecked]); */
 
   return (
     <Checkbox

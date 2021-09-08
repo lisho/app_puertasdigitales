@@ -45,7 +45,7 @@ const FormularioPuerta = ({
   /**
    * Desplegamos los valores de formValues
    */
-  const { titulo, descripcion, proceso, foto, video, etiqueta } = formValues;
+  const { id, titulo, descripcion, proceso, foto, video, etiqueta } = formValues;
 
   const [valueProceso, setValueProceso] = useState("");
   const initialRef = useRef();
@@ -60,13 +60,18 @@ const FormularioPuerta = ({
    */
   const [etiquetaTipos, setEtiquetaTipos] = useState([]);
 
-  useEffect(() => {
+ /*  useEffect(() => {
     console.log(`formValues`, formValues);
     console.log(`etiquetaTipos`, etiquetaTipos);
     console.log(`etiqueta`, etiqueta);
     console.log(`titulo`, titulo);
     console.log(`puertaParaEditar`, puertaParaEditar)
-  }, [formValues, etiquetaTipos]);
+  }, [formValues, etiquetaTipos]); */
+
+  /* useEffect(() => {
+    console.log(`etiquetaIsChecked`, etiquetaIsChecked);
+    console.log(`todasEtiquetas`, todasEtiquetas);
+  }, [etiquetaIsChecked]); */
 
   /**
    * Creamos un estado para almacenar el estado ( booleano ) de cada estiqueta para
@@ -75,9 +80,16 @@ const FormularioPuerta = ({
   const [etiquetaIsChecked, setEtiquetaIsChecked] = useState([]);
 
   useEffect(() => {
-    console.log(`etiquetaIsChecked`, etiquetaIsChecked);
-    console.log(`todasEtiquetas`, todasEtiquetas);
-  }, [etiquetaIsChecked]);
+/* 
+    const etiquetaCompleta = [{...formValues.etiqueta.etiquetado}, {
+      etiquetumId: etiqueta.id,
+      puertumId: id} ]
+console.log(`etiquetaCompleta`, etiquetaCompleta) */
+
+    /* setFormValues({...formValues, etiquetaCompleta}) */
+  }, [])
+
+
 
   /**
    * Traemos los datos de las etiquetas organizados por tipos para mostrar ordenados en el formulario
@@ -104,7 +116,9 @@ const FormularioPuerta = ({
    * Iniciamos etiquetaIsChecked con un array de las etiquetas asociadas a esta puerta
    */
   useEffect(() => {
-    setEtiquetaIsChecked([...etiqueta]);
+    setEtiquetaIsChecked(
+      [...etiqueta]
+      );
   }, [etiqueta]);
 
   /**
@@ -125,20 +139,23 @@ const FormularioPuerta = ({
   };
 
   const handleSubmit = () => {
+  const etiquetasId = etiquetaIsChecked.map(etiq => etiq.id);
+
     const formValuesCompletos = {
       ...formValues,
       proceso: valueProceso,
-      etiqueta:etiquetaIsChecked
+      etiqueta:/* etiquetaIsChecked */etiquetasId
+
     };
-    console.log(`formValuesCompletos`, formValuesCompletos);
+
     if (puertaParaEditar) {
       handleEditar(formValuesCompletos);
     } else {
       handleAdd(formValuesCompletos);
-    }
+    } 
 
-    console.log("Nueva tarea enviada...");
-    setFormValues(valoresIniciales);
+/*     console.log("Nueva tarea enviada...");
+ */    setFormValues(valoresIniciales);
     setValueProceso(""); 
   };
 
@@ -150,8 +167,8 @@ const FormularioPuerta = ({
 
   useEffect(() => {
     puertaParaEditar && setFormValues(puertaParaEditar);
-    console.log("Tarea para editar...", puertaParaEditar);
-    console.log("Valores del formulario...", formValues);
+/*     console.log("Tarea para editar...", puertaParaEditar);*/
+/*     console.log("Valores del formulario...", formValues); */
   }, [puertaParaEditar]);
 
   /**

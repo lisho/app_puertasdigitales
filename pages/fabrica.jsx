@@ -20,6 +20,7 @@ const fabrica = () => {
   const { isOpen, onOpen, onClose } = useDisclosure(); // Manejador del modal del formulario de fabrica de puertas
   const [formValues, setFormValues] = useState(valoresIniciales);
   const [puertaParaEditar, setPuertaParaEditar] = useState(null); // Se llena cuando hay una tarea para editar
+  const [indexParaEditar, setIndexParaEditar] = useState(null)
   const [listaPuertas, setListaPuertas] = useState([]);
 
   /**
@@ -41,16 +42,13 @@ const fabrica = () => {
       ...puerta,
       
     };
-/* 
-    console.log(nuevaPuerta);
-    console.log(puerta)
-     */
-    crearNuevoElementoEnBd(
-      process.env.NEXT_PUBLIC_URL_API+"puertas/",
+/*     console.log(`nuevaPuerta`, nuevaPuerta)
+ */     crearNuevoElementoEnBd(
+      process.env.NEXT_PUBLIC_URL_API+"puertas/etiquetadas/",
       nuevaPuerta,
       setListaPuertas,
       listaPuertas
-    );
+    ); 
 
     onClose();
   };
@@ -62,9 +60,9 @@ const fabrica = () => {
    **/
 
   const handleEditar = (puertaEditada) => {
-
-    editarElementoEnBd(process.env.NEXT_PUBLIC_URL_API+"puertas/"+puertaEditada.id, puertaEditada, setListaPuertas);
-
+/*     console.log(`puertaEditada`, puertaEditada)
+ */    editarElementoEnBd(process.env.NEXT_PUBLIC_URL_API+"puertas/etiquetadas/"+puertaEditada.id, puertaEditada, setListaPuertas, listaPuertas, indexParaEditar);
+    setIndexParaEditar(null);
     setPuertaParaEditar(null);
     onClose();
   };
@@ -106,6 +104,7 @@ const fabrica = () => {
                 listaPuertas ={listaPuertas}
                 setListaPuertas ={setListaPuertas}
                 setPuertaParaEditar ={setPuertaParaEditar}
+                setIndexParaEditar ={setIndexParaEditar}
                 onOpen={onOpen}
             />
           </Flex>

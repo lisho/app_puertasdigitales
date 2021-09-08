@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Tag } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import traerListaCompleta from "../helpers/traerListaCompleta";
 import MUIDataTable, { ExpandButton, TableFilterList } from "mui-datatables";
@@ -9,6 +9,7 @@ const ListaDeEtiquetasDataTableUi = ({
   listaEtiquetas,
   setListaEtiquetas,
   setEtiquetaParaEditar,
+  setIndexParaEditar,
   onOpen,
 }) => {
   const [resizableColumns, setResizableColumns] = useState(false);
@@ -30,7 +31,18 @@ const ListaDeEtiquetasDataTableUi = ({
     {
       name:"etiquetaTipo.tipo",
       label:"Tipo",
-      
+      options:{
+        customBodyRenderLite: (dataIndex) => {     
+          return <Tag  
+          bg={listaEtiquetas[dataIndex].etiquetaTipo.color} 
+          m={1}
+          align="center"
+          p={2}
+          >
+            {listaEtiquetas[dataIndex].etiquetaTipo.tipo}
+          </Tag>; 
+      },
+      }
     },
     {
       name: "Editar",
@@ -82,6 +94,7 @@ const ListaDeEtiquetasDataTableUi = ({
 
   const handleEditar = (dataIndex, rowIndex) => {
     let elementoParaEditar = listaEtiquetas[dataIndex];
+    setIndexParaEditar(dataIndex);
     setEtiquetaParaEditar(elementoParaEditar);
     onOpen();
   };
