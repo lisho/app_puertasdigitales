@@ -3,7 +3,7 @@ import { useRef } from "react";
 import useDragScroll from "use-drag-scroll";
 import VerComoGrid from "./VerComoGrid";
 
-const PuertasRow = ({ children, titulo }) => {
+const PuertasRow = ({ children, titulo, filtro }) => {
   const rowRef = useRef(null);
 
   useDragScroll({
@@ -16,13 +16,13 @@ const PuertasRow = ({ children, titulo }) => {
       <style jsx>{`
         .puertas-row {
           display: flex;
-          transition: all 450ms ease;
+          transition: all 450ms ease; 
           /* overflow-y: visible; */
           overflow-x: scroll;
           padding: 55px 50px;
           -ms-overflow-style: none; /* IE and Edge */
           scrollbar-width: none; /* Firefox */
-          croll-snap-type: x proximity;
+          croll-snap-type: x proximity; 
           /*  margin-bottom:30px; */
           /* height: 110%; */
         }
@@ -46,7 +46,7 @@ const PuertasRow = ({ children, titulo }) => {
         <Heading as="h2" size="xl" mt="3">
           {titulo}
         </Heading>
-        <VerComoGrid />
+        <VerComoGrid filtro={filtro} />
       </Box>
       <Box pl="3%"
         pr="3%">

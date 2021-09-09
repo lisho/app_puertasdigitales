@@ -18,8 +18,8 @@ import { useLoginContext } from "../contextos/LoginProvider";
 const Navbar = () => {
   const { usuarioLogueado, logOut } = useLoginContext();
   const router = useRouter();
-  console.log(router)
-  return router.route !== "/" ? 
+
+  return router.route !== "/" ? (
     <Box
       w="100%"
       height="80px"
@@ -44,13 +44,17 @@ const Navbar = () => {
           left="5"
           alignSelf="left"
         /> */}
-      <Text display="flex" m="10">
+      {/*  <Text display="flex" m="10">
         LOGO
-      </Text>
+      </Text> */}
+
+     
+        <Image src="/logo_puertas_alfa.png" alt="Logo puertas digitales" h="70px" ml="3%"/>
+   
 
       <Menu id="btn-perfil">
-        <MenuButton m="10" >
-          <Box display="flex" alignItems="center"> 
+        <MenuButton m="10">
+          <Box display="flex" alignItems="center">
             <Image
               boxSize="2rem"
               borderRadius="full"
@@ -60,46 +64,76 @@ const Navbar = () => {
             />
             <Text>
               {usuarioLogueado.username}
-              {usuarioLogueado.rol==="admin" && " (Admin)"}
+              {usuarioLogueado.rol === "admin" && " (Admin)"}
             </Text>
             <ChevronDownIcon />
           </Box>
         </MenuButton>
         <MenuList id="btn-perfil-menulist">
-          <MenuItem keyid="menuItem1" key="menuItem1">Conoce el proyecto</MenuItem>
-          <MenuItem keyid="menuItem2" key="menuItem2">Mis Favoritos</MenuItem>
-          
-          {usuarioLogueado.rol == "admin" 
-            &&  
+          <MenuItem keyid="menuItem1" key="menuItem1">
+            Conoce el proyecto
+          </MenuItem>
+          <MenuItem keyid="menuItem2" key="menuItem2">
+            Mis Favoritos
+          </MenuItem>
+
+          {usuarioLogueado.rol == "admin" && (
             <>
-
-              <MenuItem 
-                  keyid="menuItem4" key="menuItem4"
-                  onClick={()=> router.route ==="/fabrica" ? router.push('/puertas') : router.push('/fabrica')}
-                  >
-                    {router.route ==="/fabrica" ? "Almacén de puertas" : "Fábrica de puertas"}
-                </MenuItem>
-                <MenuItem 
-                  keyid="menuItem3" key="menuItem3"
-                  onClick={()=> router.route ==="/etiquetas" ? router.push('/puertas') : router.push('/etiquetas')}
-                  >
-                    {router.route ==="/etiquetas" ? "Almacén de puertas" : "Gestión de Etiquetas"}
-                </MenuItem>
-                <MenuItem 
-                  keyid="menuItem5" key="menuItem5"
-                  onClick={()=> router.route ==="/etiquetas" ? router.push('/puertas') : router.push('/etiquetatipos')}
-                  >
-                    {router.route ==="/etiquetatipos" ? "Almacén de puertas" : "Gestión de Tipos de Etiquetas"}
-                </MenuItem>
+              <MenuItem
+                keyid="menuItem4"
+                key="menuItem4"
+                onClick={() =>
+                  router.route === "/fabrica"
+                    ? router.push("/puertas")
+                    : router.push("/fabrica")
+                }
+              >
+                {router.route === "/fabrica"
+                  ? "Almacén de puertas"
+                  : "Fábrica de puertas"}
+              </MenuItem>
+              <MenuItem
+                keyid="menuItem3"
+                key="menuItem3"
+                onClick={() =>
+                  router.route === "/etiquetas"
+                    ? router.push("/puertas")
+                    : router.push("/etiquetas")
+                }
+              >
+                {router.route === "/etiquetas"
+                  ? "Almacén de puertas"
+                  : "Gestión de Etiquetas"}
+              </MenuItem>
+              <MenuItem
+                keyid="menuItem5"
+                key="menuItem5"
+                onClick={() =>
+                  router.route === "/etiquetas"
+                    ? router.push("/puertas")
+                    : router.push("/etiquetatipos")
+                }
+              >
+                {router.route === "/etiquetatipos"
+                  ? "Almacén de puertas"
+                  : "Gestión de Tipos de Etiquetas"}
+              </MenuItem>
             </>
-          }
+          )}
 
-          <MenuItem keyid="menuItem5" keyid="menuItem5" onClick={() =>logOut()}>Cerrar Sesion </MenuItem>
+          <MenuItem
+            keyid="menuItem5"
+            keyid="menuItem5"
+            onClick={() => logOut()}
+          >
+            Cerrar Sesion{" "}
+          </MenuItem>
         </MenuList>
-      </Menu> 
+      </Menu>
     </Box>
-   :  <div></div>
-  ;
+  ) : (
+    <div></div>
+  );
 };
 
 export default Navbar;

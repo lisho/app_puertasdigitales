@@ -39,7 +39,7 @@ const listaEtiquetas = [
   { etiqueta: "RGC", color: "blue" },
 ];
 
-const PuertaCardVertical = ({ ratioH = 1, ratioW = 1, url, img }) => {
+const PuertaCardVertical = ({ ratioH = 1, ratioW = 1, url, img, hasSwiped }) => {
   const [height, setHeight] = useState(null);
   const [width, setWidth] = useState(null);
   const { isOpen: tarjetaFijada, onToggle: onToggleTarjetaFijada } =
@@ -70,6 +70,9 @@ const PuertaCardVertical = ({ ratioH = 1, ratioW = 1, url, img }) => {
   const handleClick = () => {
     /* onToggleTarjetaFijada(); */
     /* onToggleTarjeta(); */
+    if (hasSwiped) {
+      e.preventDefault()
+    }
     isTarjetaGrande ? onOpen() : onToggleTarjetaGrande();
     setIsSoloUnaTarjetaGrande();
   };
@@ -121,7 +124,7 @@ const PuertaCardVertical = ({ ratioH = 1, ratioW = 1, url, img }) => {
             mb={6}
             pos={"relative"}
             bgImage= "/imagenes/segSoc.jpg"
-
+            backgroundSize = "cover"
           >
             
 
@@ -134,6 +137,7 @@ const PuertaCardVertical = ({ ratioH = 1, ratioW = 1, url, img }) => {
               right="15px"
               top="15px"
               bg="white"
+
             />
             <Box position="absolute" bottom="15px" right="15px">
               <ScoreGroup score="3.2" />

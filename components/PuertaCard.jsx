@@ -122,8 +122,10 @@ const PuertaCard = ({ ratioH = 1, ratioW = 1, url, img }) => {
             mx={-6}
             mb={6}
             pos={"relative"}
+            bgImage={"/imagenes/catedral.jpeg"}
+            backgroundSize = "cover"
           >
-            <Image
+           {/*  <Image
               src={
                 "/imagenes/catedral.jpeg"
               }
@@ -131,7 +133,7 @@ const PuertaCard = ({ ratioH = 1, ratioW = 1, url, img }) => {
               w={"auto"}
               h={"100%"}
               layout={"fill"}
-            />
+            /> */}
           </Box>
           <Stack>
             {/* <Text

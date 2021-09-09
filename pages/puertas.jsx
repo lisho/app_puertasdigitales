@@ -47,6 +47,11 @@ export default function Puertas() {
           display: grid;
           background-color: ${process.env.NEXT_PUBLIC_COLOR_FONDO_ALMACEN}
             /*rgb(28, 44, 44)*/;
+
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none; 
         }
       `}</style>
 
@@ -55,9 +60,7 @@ export default function Puertas() {
 
         {console.log(`puertas`, puertas)}
 
-         <PuertasRow titulo="Mis Favoritos" mt="3" pt="5">
-          {console.log(puertas)}
-
+         <PuertasRow titulo="Mis Favoritos" mt="3" pt="5" filtro = {{etiqueta:[15,17]}}>
           {puertas[0]?.map((puerta) => (
             <PuertaCardVertical
               key={uuidv4()}
