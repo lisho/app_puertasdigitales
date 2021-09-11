@@ -5,7 +5,7 @@ export default function useSoloUnaTarjetaGrande(situacionInicial, isTarjetaGrand
     const ref = useRef(null);
 
     const handleClickOutside = (event) => {
-        console.log(ref)
+        
         if (isTarjetaGrande && ref.current && !ref.current.contains(event.target)) {
             setIsSoloUnaTarjetaGrande(true);
           

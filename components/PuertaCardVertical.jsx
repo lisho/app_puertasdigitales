@@ -39,7 +39,7 @@ const listaEtiquetas = [
   { etiqueta: "RGC", color: "blue" },
 ];
 
-const PuertaCardVertical = ({ ratioH = 1, ratioW = 1, url, img, hasSwiped }) => {
+const PuertaCardVertical = ({ ratioH = 1, ratioW = 1, url, img }) => {
   const [height, setHeight] = useState(null);
   const [width, setWidth] = useState(null);
   const { isOpen: tarjetaFijada, onToggle: onToggleTarjetaFijada } =
@@ -70,11 +70,10 @@ const PuertaCardVertical = ({ ratioH = 1, ratioW = 1, url, img, hasSwiped }) => 
   const handleClick = () => {
     /* onToggleTarjetaFijada(); */
     /* onToggleTarjeta(); */
-    if (hasSwiped) {
-      e.preventDefault()
-    }
+
     isTarjetaGrande ? onOpen() : onToggleTarjetaGrande();
     setIsSoloUnaTarjetaGrande();
+   
   };
 
   useEffect(() => {
@@ -95,12 +94,11 @@ const PuertaCardVertical = ({ ratioH = 1, ratioW = 1, url, img, hasSwiped }) => 
       <Center
         /* py={6} */ mx={2}
         ref={ref}
-        cursor="pointer"
+        /* cursor="pointer" */
         onClick={() => handleClick()}
-        transition="all 450ms ease"
+        transition=" 450ms ease" 
         zIndex={isTarjetaGrande ? "999" : "100"}
-        transform={isTarjetaGrande && "scale(1.2)"}
-
+        transform={isTarjetaGrande && "scale(1.05)"}
         /*  -webkit-box-shadow: 0px 0px 60px -7px rgba(0,0,0,0.75);
       -moz-box-shadow: 0px 0px 60px -7px rgba(0,0,0,0.75);
        */
@@ -115,6 +113,8 @@ const PuertaCardVertical = ({ ratioH = 1, ratioW = 1, url, img, hasSwiped }) => 
           p={6}
           overflow={"hidden"}
           boxShadow={isTarjetaGrande && "0px 0px 30px 0px rgba(0,0,0,0.75)"}
+                   
+
         >
           <Box
             h={"210px"}
@@ -163,7 +163,7 @@ const PuertaCardVertical = ({ ratioH = 1, ratioW = 1, url, img, hasSwiped }) => 
             <Text
               color={"gray.500"}
               isTruncated /*={isTarjetaGrande ? false : true} */
-              transition="all 450ms ease"
+              /* transition="all 450ms ease" */
             >
               Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
               nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam

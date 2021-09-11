@@ -90,12 +90,12 @@ const PuertaCard = ({ ratioH = 1, ratioW = 1, url, img }) => {
 
       <Center /* py={6} */ mx={2}
       ref={ref}
-      cursor="pointer"
+      /* cursor="pointer" */
       onClick={() => handleClick()}
-      transition="all 450ms ease"
+      transition=" 450ms ease"
       zIndex={isTarjetaGrande ? "999" : "100"}
 
-      transform = {isTarjetaGrande && "scale(1.1)"}
+      transform = {isTarjetaGrande && "scale(1.05)"}
      
       
      /*  -webkit-box-shadow: 0px 0px 60px -7px rgba(0,0,0,0.75);
@@ -152,7 +152,7 @@ const PuertaCard = ({ ratioH = 1, ratioW = 1, url, img }) => {
               Informe de vida laboral
             </Heading>
 
-            <Text color={"gray.500"} isTruncated={isTarjetaGrande ? false : true} transition="all 450ms ease">
+            <Text color={"gray.500"} isTruncated={isTarjetaGrande ? false : true} /* transition="all 450ms ease" */>
               Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
               nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
               erat, sed diam voluptua. At vero eos et accusam et justo duo

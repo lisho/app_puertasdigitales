@@ -41,7 +41,7 @@ const ScoreGroup = ({score, color = "#ffd42a"}) => {
                    /*  ref={(ref) => refs.current.push(ref)} */
                 />)
             totalEstrellas--;
-            console.log(` totalEstrellas`,  totalEstrellas)
+       /*      console.log(` totalEstrellas`,  totalEstrellas) */
         }
 
         for(let i = 1; i <= totalEstrellas; i++){

@@ -71,8 +71,8 @@ const FormularioEtiquetas = (
 
   useEffect(() => {
     etiquetaParaEditar && setFormValues(etiquetaParaEditar);
-    console.log("Tarea para editar...", etiquetaParaEditar);
-    console.log("Valores del formulario...", formValues);
+ /*    console.log("Tarea para editar...", etiquetaParaEditar);
+    console.log("Valores del formulario...", formValues); */
   }, [etiquetaParaEditar]);
 
   useEffect(() => {
@@ -80,7 +80,7 @@ const FormularioEtiquetas = (
       process.env.NEXT_PUBLIC_URL_API + "etiquetaTipos/"
     );
     listaTipos.then((resultado) => setListaTiposEtiqueta(resultado));
-      console.log(`listaTiposEtiqueta`, listaTiposEtiqueta)
+     /*  console.log(`listaTiposEtiqueta`, listaTiposEtiqueta) */
   }, []);
 
   return (

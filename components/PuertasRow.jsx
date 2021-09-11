@@ -1,22 +1,27 @@
 import { Box, Divider, Heading } from "@chakra-ui/react";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import useDragScroll from "use-drag-scroll";
 import VerComoGrid from "./VerComoGrid";
 
 const PuertasRow = ({ children, titulo, filtro }) => {
   const rowRef = useRef(null);
-
+  const [cursorState, setCursorState] = useState("pointer")
+  const [transformState, setTransformState] = useState("")
   useDragScroll({
     sliderRef: rowRef,
     momentumVelocity: 0.8,
   });
+
+  useEffect(() => {
+    cursorState === "grabbing" ? setTransformState("scale(1.03)") : setTransformState("") 
+  }, [cursorState]);
 
   return (
     <>
       <style jsx>{`
         .puertas-row {
           display: flex;
-          transition: all 450ms ease; 
+          
           /* overflow-y: visible; */
           overflow-x: scroll;
           padding: 55px 50px;
@@ -25,6 +30,9 @@ const PuertasRow = ({ children, titulo, filtro }) => {
           croll-snap-type: x proximity; 
           /*  margin-bottom:30px; */
           /* height: 110%; */
+          cursor : ${cursorState};
+          transform : ${transformState};
+          /* transition:  850ms ease;   */
         }
 
         .puertas-row::-webkit-scrollbar {
@@ -42,6 +50,7 @@ const PuertasRow = ({ children, titulo, filtro }) => {
         display="flex"
         alignItems="center"
         justifyContent="space-between"
+        
       >
         <Heading as="h2" size="xl" mt="3">
           {titulo}
@@ -53,7 +62,13 @@ const PuertasRow = ({ children, titulo, filtro }) => {
         <Divider />
       </Box>
 
-      <div className="puertas-row" ref={rowRef}>
+      <div 
+        className="puertas-row" 
+        ref={rowRef}
+        onMouseDown= {() => setCursorState("grabbing")}
+        onMouseUp={() => setCursorState("pointer")}  
+        
+      >
         {children}
       </div>
     </>
