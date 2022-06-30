@@ -24,11 +24,13 @@ import {
 } from "@chakra-ui/react";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
-import "react-quill/dist/quill.snow.css";
+/* import "react-quill/dist/quill.snow.css"; */
 import traerListaCompleta from "../helpers/traerListaCompleta";
 import filtrarUnArrayPorId from "../helpers/filtrarUnArrayPorId";
 import { v4 as uuidv4 } from "uuid";
 import ControlledCheckBox from "./ControlledCheckBox";
+import InputUpLoadFile from "./InputUpLoadFile";
+import addNuevaFoto from "../helpers/addNuevaFoto";
 
 const FormularioPuerta = ({
   isOpen,
@@ -48,8 +50,9 @@ const FormularioPuerta = ({
   const { id, titulo, descripcion, proceso, foto, video, etiqueta } = formValues;
 
   const [valueProceso, setValueProceso] = useState("");
+  const [valueFoto, setValueFoto] = useState(null);
   const initialRef = useRef();
-
+  
   /**
    * Traemos los todas las etiquetas disponibles para asignar a cada puerta
    */
@@ -60,19 +63,6 @@ const FormularioPuerta = ({
    */
   const [etiquetaTipos, setEtiquetaTipos] = useState([]);
 
- /*  useEffect(() => {
-    console.log(`formValues`, formValues);
-    console.log(`etiquetaTipos`, etiquetaTipos);
-    console.log(`etiqueta`, etiqueta);
-    console.log(`titulo`, titulo);
-    console.log(`puertaParaEditar`, puertaParaEditar)
-  }, [formValues, etiquetaTipos]); */
-
-  /* useEffect(() => {
-    console.log(`etiquetaIsChecked`, etiquetaIsChecked);
-    console.log(`todasEtiquetas`, todasEtiquetas);
-  }, [etiquetaIsChecked]); */
-
   /**
    * Creamos un estado para almacenar el estado ( booleano ) de cada estiqueta para
    * esta puerta en este formulario.
@@ -80,14 +70,10 @@ const FormularioPuerta = ({
   const [etiquetaIsChecked, setEtiquetaIsChecked] = useState([]);
 
   useEffect(() => {
-/* 
-    const etiquetaCompleta = [{...formValues.etiqueta.etiquetado}, {
-      etiquetumId: etiqueta.id,
-      puertumId: id} ]
-console.log(`etiquetaCompleta`, etiquetaCompleta) */
 
-    /* setFormValues({...formValues, etiquetaCompleta}) */
-  }, [])
+    valueFoto && console.log(`valueFoto`, valueFoto.name)
+
+  }, [valueFoto])
 
 
 
@@ -144,18 +130,26 @@ console.log(`etiquetaCompleta`, etiquetaCompleta) */
     const formValuesCompletos = {
       ...formValues,
       proceso: valueProceso,
-      etiqueta:/* etiquetaIsChecked */etiquetasId
+      etiqueta:/* etiquetaIsChecked */etiquetasId,
+      foto: valueFoto.name
 
     };
 
+   
+
     if (puertaParaEditar) {
       handleEditar(formValuesCompletos);
-    } else {
-      handleAdd(formValuesCompletos);
-    } 
 
-/*     console.log("Nueva tarea enviada...");
- */    setFormValues(valoresIniciales);
+    } else {
+      
+      handleAdd(formValuesCompletos);  
+      
+      if (valueFoto) {
+        console.log(`formValuesCompletos`, formValuesCompletos)
+        addNuevaFoto( process.env.NEXT_PUBLIC_URL_API + "puertas/foto", valueFoto)
+      }
+    } 
+    setFormValues(valoresIniciales);
     setValueProceso(""); 
   };
 
@@ -249,13 +243,16 @@ console.log(`etiquetaCompleta`, etiquetaCompleta) */
             </FormControl>
 
             <FormControl mt={3}>
-              <FormLabel>Añade una captura de la web de referencia</FormLabel>
-              <Input
+              <FormLabel>Añade una foto</FormLabel>
+              <InputUpLoadFile 
+                setValueFoto= {setValueFoto}
+              />
+              {/* <Input
                 placeholder="Añade Captura"
                 value={foto}
                 name="foto"
                 onChange={(e) => handleInputChange(e)}
-              />
+              /> */}
             </FormControl>
 
             <FormControl mt={3}>

@@ -109,7 +109,7 @@ const Navbar = () => {
                 keyid="menuItem5"
                 key="menuItem5"
                 onClick={() =>
-                  router.route === "/etiquetas"
+                  router.route === "/etiquetatipos"
                     ? router.push("/puertas")
                     : router.push("/etiquetatipos")
                 }

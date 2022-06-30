@@ -45,9 +45,6 @@ const FormularioEtiquetas = (
     setFormValues(changedFormValues);
   };
 
-
-  
-
   const handleSubmit = () => {
     const formValuesCompletos = {
       ...formValues,

@@ -2,7 +2,8 @@ import { createContext, useState, useContext, useEffect } from "react";
 import { useRouter } from 'next/router'
 import { solicitarLogin } from "../helpers/solicitarLogin";
 import recuperaToken from "../helpers/recuperaToken";
-import jwt from "jwt-simple"
+/* import jwt from "../helpers/jwt";  */
+import jwt from "jwt-simple";
 import moment from "moment"
 /* Creamos un contexto para manejar la pagina que está activa */
 const LoginContext = createContext();
@@ -29,9 +30,11 @@ const LoginProvider = ({children}) => {
       /* .then((res) => console.log(res)) */
       .then((login)=>{
         if (login.error) {
+          console.log(login.error)
           setUsuarioLogueado({}); 
           setMsgError(login.error)
         } else { 
+          console.log("login", login);
           setIsLoged(true);
           setUsuarioLogueado(jwt.decode(login.token, "frase secreta"));
           // Guardamos en el sessionStorage
@@ -40,7 +43,8 @@ const LoginProvider = ({children}) => {
           router.push('/puertas');
           setMsgError("");
           setCredenciales(null)
-        }
+        } 
+
       })
     }, [credenciales]);
 

@@ -55,15 +55,15 @@ const ListaDePuertasDataTableUi = ({
         filterType: 'multiselect',
         filterOptions: {
           renderValue: val => {
-           console.log(`valFilterOptions`, val)
+          /*  console.log(`valFilterOptions`, val) */
           } 
         },
         customBodyRender: (value, tableMeta, updateValue) => {
-         console.log(`value`, value)
+        /*  console.log(`value`, value)
          console.log(`tableMeta`, tableMeta)
-         console.log(`updateValue`, updateValue)
+         console.log(`updateValue`, updateValue) */
 
-          return value.map((val, key) => {
+          return value?.map((val, key) => {
            /*  updateValue(val.etiqueta); */
             return <Tag 
               bg={val.etiquetaTipo?.color}  

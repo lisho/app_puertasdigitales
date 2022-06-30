@@ -58,8 +58,6 @@ export default function Puertas() {
       <div className="container">
         <Banner />
 
-        {console.log(`puertas`, puertas)}
-
          <PuertasRow titulo="Mis Favoritos" mt="3" pt="5" filtro = {{etiqueta:[15,17]}}>
           {puertas[0]?.map((puerta) => (
             <PuertaCardVertical
